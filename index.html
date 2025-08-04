@@ -1,0 +1,3116 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deutsch Lernen | Alman dili öyrənmə aləti</title>
+</head>
+<style>
+          :root {
+            --primary: #FF6B6B;
+            --secondary: #4ECDC4;
+            --accent: #FFD166;
+            --dark: #292F36;
+            --light: #F7FFF7;
+            --success: #c16ce8;
+            --error: #f87171;
+            --warning: #fbbf24;
+            --info: #17a2b8;
+            --masculine: #4ECDC4;
+            --feminine: #e213bc;
+            --neuter: #25ef13;
+            --glass: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --glass-highlight: rgba(255, 255, 255, 0.3);
+            --font-main: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: var(--font-main);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--dark) 0%, #261a2e 100%);
+            color: var(--light);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            text-align: center;
+        }
+
+        .logo-flags {
+            display: flex;
+            margin-left: 1rem;
+        }
+
+        .flag-circle {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin-right: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            position: relative;
+            border: 1px solid var(--glass-border);
+        }
+
+        .flag-circle::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, 
+                rgba(255,255,255,0.1) 0%, 
+                rgba(255,255,255,0.3) 50%, 
+                rgba(255,255,255,0.1) 100%);
+            animation: wave 3s linear infinite;
+        }
+
+        .flag-de {
+            background: linear-gradient(to bottom, #000000 33%, #DD0000 33%, #DD0000 66%, #FFCE00 66%);
+        }
+
+        .flag-az {
+            background: linear-gradient(to bottom, #00B9E4 33%, #ED2939 33%, #ED2939 66%, #0ab629 66%);
+        }
+
+        @keyframes wave {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* New Card Styles */
+        .word-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+            perspective: 1000px;
+            transform-style: preserve-3d;
+            min-height: 200px;
+        }
+
+        .word-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(114, 240, 200, 0.327), transparent);
+            transition: left 0.5s;
+        }
+
+        .word-card:hover::before {
+            left: 100%;
+        }
+
+        .word-card:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 10px 25px rgba(238, 128, 128, 0.2);
+        }
+
+        .word-card.masculine {
+            border-color: var(--masculine);
+        }
+
+        .word-card.feminine {
+            border-color: var(--feminine);
+        }
+
+        .word-card.neuter {
+            border-color: var(--neuter);
+        }
+
+        .word-card.masculine:hover {
+            background: rgba(78, 205, 196, 0.2);
+            border-color: var(--masculine);
+        }
+
+        .word-card.feminine:hover {
+            background: rgba(255, 107, 107, 0.2);
+            border-color: var(--feminine);
+        }
+
+        .word-card.neuter:hover {
+            background: rgba(102, 255, 0, 0.2);
+            border-color: var(--neuter);
+        }
+
+        .word-big {
+            font-size: 1.8em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .word-details {
+            font-size: 1.1em;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .word-translation {
+            font-size: 1em;
+            opacity: 0.9;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+
+        .word-image {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            border-radius: 10px;
+            margin: 10px auto;
+            display: block;
+            background: white;
+            padding: 5px;
+        }
+
+        .gender-tag {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+
+        .gender-tag.masculine {
+            background-color: var(--masculine);
+            color: var(--dark);
+        }
+
+        .gender-tag.feminine {
+            background-color: var(--feminine);
+            color: white;
+        }
+
+        .gender-tag.neuter {
+            background-color: var(--neuter);
+            color: var(--dark);
+        }
+
+        /* Activity Grid */
+        .activity-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .activity-container {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid var(--glass-border);
+            min-height: 60vh;
+            position: relative;
+            overflow: hidden;
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .activity-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .activity-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .close-activity {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .close-activity:hover {
+            background: var(--glass-highlight);
+            transform: rotate(90deg);
+        }
+
+        /* Flashcard Styles */
+        .flashcard-container {
+            perspective: 1000px;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            height: 400px;
+        }
+
+        .flashcard {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+            cursor: pointer;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(115, 99, 99, 0.252);
+        }
+
+        .flashcard.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .flashcard-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            background: linear-gradient(135deg, rgba(102, 213, 241, 0.2) 0%, rgba(0,210,255,0.2) 100%);
+            border: 1px solid var(--glass-border);
+        }
+
+        .flashcard-back {
+            transform: rotateY(180deg);
+            background: linear-gradient(135deg, rgba(153, 247, 81, 0.2) 0%, rgba(36, 251, 237, 0.2) 100%);
+        }
+
+        .flashcard-word {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .flashcard-details {
+            font-size: 1.2rem;
+            color: var(--light);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .gender-symbol {
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        .masculine {
+            color: var(--masculine);
+        }
+
+        .feminine {
+            color: var(--feminine);
+        }
+
+        .neuter {
+            color: var(--neuter);
+        }
+
+        .flashcard-translation {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-top: 2rem;
+            padding: 1rem 2rem;
+            background: var(--glass);
+            border-radius: 12px;
+            border: 1px solid var(--glass-border);
+            display: none;
+        }
+
+        .flashcard-image {
+            width: 150px;
+            height: 150px;
+            object-fit: contain;
+            margin: 1rem 0;
+            border-radius: 8px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .flashcard-back .flashcard-translation {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .flashcard-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        /* Typing Trainer Styles */
+        .typing-container {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .typing-prompt {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            font-weight: 600;
+        }
+
+        .typing-instruction {
+            opacity: 0.7;
+            margin-bottom: 2rem;
+        }
+
+        .typing-input {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.2rem;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            color: white;
+            margin-bottom: 1rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .typing-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px rgba(255,140,0,0.3);
+        }
+
+        .typing-feedback {
+            font-size: 1.2rem;
+            margin-top: 1rem;
+            min-height: 2rem;
+        }
+
+        .correct {
+            color: var(--success);
+        }
+
+        .incorrect {
+            color: var(--error);
+        }
+
+        /* Drag and Drop Styles */
+        .drag-drop-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .drag-column, .drop-column {
+            background: var(--glass);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px dashed var(--glass-border);
+            min-height: 300px;
+        }
+
+        .drag-column {
+            border-color: var(--primary);
+        }
+
+        .drop-column {
+            border-color: var(--secondary);
+        }
+
+        .drag-item {
+            background: linear-gradient(135deg, rgba(58,123,213,0.3) 0%, rgba(0,210,255,0.3) 100%);
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            cursor: grab;
+            border: 1px solid var(--glass-border);
+            transition: all 0.3s;
+        }
+
+        .drag-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .drag-item:active {
+            cursor: grabbing;
+        }
+
+        .drop-slot {
+            background: var(--glass);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            min-height: 60px;
+            border: 1px dashed var(--glass-highlight);
+            transition: all 0.3s;
+        }
+
+        .drop-slot.highlight {
+            background: rgba(74, 222, 128, 0.1);
+            border-color: var(--success);
+        }
+
+        /* Quiz Styles */
+        .quiz-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .quiz-question {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .quiz-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .quiz-option {
+            background: var(--glass);
+            padding: 1.5rem;
+            border-radius: 12px;
+            cursor: pointer;
+            border: 1px solid var(--glass-border);
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .quiz-option:hover {
+            background: var(--glass-highlight);
+        }
+
+        .quiz-option.selected {
+            background: var(--accent);
+            border-color: var(--accent);   
+            color: white;
+        }
+
+        .quiz-option.correct {
+            background: var(--success);
+            border-color: var(--success);
+            color: white;
+        }
+
+        .quiz-option.incorrect {
+            background: var(--error);
+            border-color: var(--error);
+            color: white;
+        }
+
+
+    /* Memory game styles */
+    .memory-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .memory-card {
+      aspect-ratio: 1;
+      background: linear-gradient(135deg, rgba(58,123,213,0.3) 0%, rgba(0,210,255,0.3) 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transform-style: preserve-3d;
+      transition: transform 0.6s, background 0.3s;
+      position: relative;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    /* Gender-based hover effects */
+    .memory-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .memory-card {
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, rgba(58,123,213,0.3) 0%, rgba(0,210,255,0.3) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+            position: relative;
+            border: 1px solid var(--glass-border);
+        }
+
+        .memory-card.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .memory-card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .memory-card-back {
+            transform: rotateY(180deg);
+        }
+
+        /* Speech Recognition Styles */
+        .speech-container {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .speech-prompt {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .speech-button {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 8px 20px rgba(58,123,213,0.3);
+            transition: all 0.3s;
+        }
+
+        .speech-button:hover {
+            transform: scale(1.05);
+        }
+
+        .speech-button.listening {
+            animation: pulse 1.5s infinite;
+        }
+
+        .speech-result {
+            min-height: 2rem;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Word of the Day Styles */
+        .wotd-container {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .wotd-card {
+            background: linear-gradient(135deg, rgba(58,123,213,0.2) 0%, rgba(0,210,255,0.2) 100%);
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid var(--glass-border);
+        }
+
+        .wotd-title {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            opacity: 0.7;
+        }
+
+        .wotd-word {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .wotd-details {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+
+        .wotd-translation {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: var(--glass);
+            border-radius: 12px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .wotd-fact {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: var(--glass);
+            border-radius: 12px;
+            border: 1px solid var(--glass-border);
+            font-style: italic;
+        }
+
+        /* Progress Tracker Styles */
+        .progress-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--glass);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid var(--glass-border);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            opacity: 0.7;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .progress-chart {
+            height: 20px;
+            background: var(--glass);
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+
+        .vocabulary-list {
+            margin-top: 2rem;
+        }
+
+        .vocabulary-category {
+            margin-bottom: 1.5rem;
+        }
+
+        .vocabulary-category h4 {
+            margin-bottom: 0.5rem;
+            color: var(--accent);
+        }
+
+        .vocabulary-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 0.5rem;
+        }
+
+        .vocabulary-item {
+            background: var(--glass);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            border: 1px solid var(--glass-border);
+            font-size: 0.9rem;
+        }
+
+        /* Controls */
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .btn-secondary {
+            background: var(--glass);
+            color: white;
+            border: 1px solid var(--glass-border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--glass-highlight);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(0, 0, 0, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 107, 107, 0); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .activity-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .drag-drop-container {
+                grid-template-columns: 1fr;
+            }
+
+            .quiz-options {
+                grid-template-columns: 1fr;
+            }
+
+            .memory-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .logo {
+                font-size: 2rem;
+            }
+        }
+</style>
+<body>
+    <div class="header">
+        <div class="logo">
+            Deutsch Lernen | Alman dili öyrənmə aləti
+            <div class="logo-flags">
+                <div class="flag-circle flag-de"></div>
+                <div class="flag-circle flag-az"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Activity Selection Grid -->
+    <div class="activity-grid" id="activity-grid">
+        <!-- 1. Vocabulary Flashcard App -->
+        <div class="word-card masculine" data-activity="flashcard">
+            <!-- <div class="gender-tag masculine">der</div> -->
+            <div class="word-big">Vokabelkarten</div>
+            <div class="word-details">Lernen Sie Nomen und Verben</div>
+            <div class="word-translation">Lüğət kartları</div>
+        </div>
+
+        <!-- 2. Typing Trainer -->
+        <div class="word-card feminine" data-activity="typing">
+            <!-- <div class="gender-tag feminine">die</div> -->
+            <div class="word-big">Schreibtrainer</div>
+            <div class="word-details">Üben Sie die richtige Schreibweise</div>
+            <div class="word-translation">Yazı məşqi</div>
+        </div>
+
+        <!-- 3. Matching Game -->
+        <div class="word-card neuter" data-activity="dragdrop">
+            <!-- <div class="gender-tag neuter">das</div> -->
+            <div class="word-big">Plural-Spiel</div>
+            <div class="word-details">Ordnen Sie Nomen ihren Pluralformen zu</div>
+            <div class="word-translation">Cəm isimləri uyğunlaşdırma</div>
+        </div>
+
+        <!-- 4. Fill-in-the-Blank -->
+        <div class="word-card masculine" data-activity="fillblank">
+            <!-- <div class="gender-tag masculine">der</div> -->
+            <div class="word-big">Lückentext</div>
+            <div class="word-details">Vervollständigen Sie Sätze</div>
+            <div class="word-translation">Boşluğu doldurun</div>
+        </div>
+
+        <!-- 5. Quiz Generator -->
+        <div class="word-card neuter" data-activity="quiz">
+            <!-- <div class="gender-tag neuter">das</div> -->
+            <div class="word-big">Quiz</div>
+            <div class="word-details">Testen Sie Ihr Wissen</div>
+            <div class="word-translation">Quiz</div>
+        </div>
+
+        <!-- 6. Memory Game -->
+        <div class="word-card neuter" data-activity="memory">
+            <!-- <div class="gender-tag neuter">das</div> -->
+            <div class="word-big">Memory-Spiel</div>
+            <div class="word-details">Finden Sie Paare</div>
+            <div class="word-translation">Yaddaş oyunu</div>
+        </div>
+
+        <!-- 7. Verb Conjugation -->
+        <div class="word-card feminine" data-activity="conjugation">
+            <!-- <div class="gender-tag feminine">die</div> -->
+            <div class="word-big">Verbkonjugation</div>
+            <div class="word-details">Üben Sie Verbformen</div>
+            <div class="word-translation">Fellərin təsriflənməsi</div>
+        </div>
+
+        <!-- 8. Speech Recognition -->
+        <div class="word-card feminine" data-activity="speech">
+            <!-- <div class="gender-tag feminine">die</div> -->
+            <div class="word-big">Aussprache</div>
+            <div class="word-details">Verbessern Sie Ihre Aussprache</div>
+            <div class="word-translation">Tələffüz</div>
+        </div>
+
+        <!-- 9. Word of the Day -->
+        <div class="word-card masculine" data-activity="wotd">
+            <!-- <div class="gender-tag masculine">der</div> -->
+            <div class="word-big">Wort des Tages</div>
+            <div class="word-details">Lernen Sie täglich ein neues Wort</div>
+            <div class="word-translation">Günün sözü</div>
+        </div>
+
+        <!-- 10. Progress Tracker -->
+        <div class="word-card neuter" data-activity="progress">
+            <!-- <div class="gender-tag neuter">das</div> -->
+            <div class="word-big">Fortschritt</div>
+            <div class="word-details">Verfolgen Sie Ihren Lernfortschritt</div>
+            <div class="word-translation">İrəliləyiş izləyicisi</div>
+        </div>
+    </div>
+
+    <!-- Activity Containers (initially hidden) -->
+    <div class="activity-container" id="activity-container">
+        <div class="activity-header">
+            <h2 class="activity-name" id="activity-name">Activity</h2>
+            <div class="close-activity" id="close-activity">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </div>
+        </div>
+
+        <!-- Activity content will be injected here -->
+        <div id="activity-content"></div>
+    </div>
+<script>
+          // Data - 160 Nouns
+        const nouns = [
+            { german: "Zeit", english: "Time", azerbaijani: "vaxt", plural: "Zeiten", gender: "feminine", type: "noun", image: "https://avatars.mds.yandex.net/i?id=4451d8939a6a4a5c9c7c6bc2e5f8cf73fcabe211-9042801-images-thumbs&n=13ttps://cdn.pixabay.com/photo/2017/01/31/15/33/clock-2025534_640.png" },
+            { german: "Mann", english: "Man", azerbaijani: "kişi", plural: "Männer", gender: "masculine", type: "noun", image: "https://cdn.https://avatars.mds.yandex.net/i?id=8c463dc89680abb1f629cad8124de695b4a3f67b-10143943-images-thumbs&n=13pixabay.com/photo/2014/04/03/10/32/businessman-310819_640.png" },
+            { german: "Hand", english: "Hand", azerbaijani: "əl", plural: "Hände", gender: "feminine", type: "noun", image: "https://cdn.pixabay.com/phhttps://avatars.mds.yandex.net/i?id=8e934d64c8722046cd552ce818401e5dc8ea1299-3706871-images-thumbs&n=13oto/2014/04/03/10/32/hand-310815_640.png" },
+            { german: "Tag", english: "Day", azerbaijani: "gün", plural: "Tage", gender: "masculine", type: "noun", image: "https://cdn.phttps://avatars.mds.yandex.net/i?id=0b28f54be6b25bc2931edb80d6bbf9be7c58806a-12884912-images-thumbs&n=13ixabay.com/photo/2013/07/12/14/53/sun-148294_640.png" },
+            { german: "Weg", english: "Way", azerbaijani: "yol", plural: "Wege", gender: "masculine", type: "noun", image: "https://cdn.pixabay.comhttps://avatars.mds.yandex.net/i?id=b3fbff029d62b225e8f596a8067ce889d8f7d5f9-4577816-images-thumbs&n=13/photo/2013/07/12/12/56/road-147170_640.png" },
+            { german: "Auge", english: "Eye", azerbaijani: "göz", plural: "Augen", gender: "neuter", type: "noun", image: "https://cdn.pixabhttps://avatars.mds.yandex.net/i?id=225c33b09428c45576602ed441027249383d4f23-5865710-images-thumbs&n=13ay.com/photo/2014/04/03/10/32/eye-310807_640.png" },
+            { german: "Sache", english: "Thing", azerbaijani: "əşya", plural: "Sachen", gender: "feminine", type: "noun", image: "https://https://avatars.mds.yandex.net/i?id=e4ac214aa114d818f23848094ecf2b2309395093-8312318-images-thumbs&n=13cdn.pixabay.com/photo/2013/07/12/15/36/box-150503_640.png" },
+            { german: "Kopf", english: "Head", azerbaijani: "baş", plural: "Köpfe", gender: "masculine", type: "noun", image: "https://cdn.pixabay.https://avatars.mds.yandex.net/i?id=955f0b116ae283a4f8e954485c26823bc45d6fcd-9107065-images-thumbs&n=13com/photo/2014/04/03/10/32/head-310812_640.png" },
+            { german: "Jahr", english: "Year", azerbaijani: "il", plural: "Jahre", gender: "neuter", type: "noun", image: "https://cdn.pixhttps://avatars.mds.yandex.net/i?id=3d376993933562e58bd1476e237c33ff-3491535-images-thumbs&n=13abay.com/photo/2013/07/13/10/51/calendar-157495_640.png" },
+            { german: "Zimmer", english: "Room", azerbaijani: "otaq", plural: "Zimmer", gender: "neuter", type: "noun", image: "https://cdhttps://avatars.mds.yandex.net/i?id=d38f60ecd4eb9d8568ccf4662c35953bc1160871-4078141-images-thumbs&n=13n.pixabay.com/photo/2017/07/01/11/11/room-2460459_640.png" },
+            { german: "Tür", english: "Door", azerbaijani: "qapı", plural: "Türen", gender: "feminine", type: "noun", image: "https://cdn.pixabay.https://avatars.mds.yandex.net/i?id=b3cdba52db30eab40c5d9d604bd6ce5600c66404-5340221-images-thumbs&n=13com/photo/2013/07/12/14/53/door-148256_640.png" },
+            { german: "Frau", english: "Woman", azerbaijani: "qadın", plural: "Frauen", gender: "feminine", type: "noun", image: "https://cdhttps://avatars.mds.yandex.net/i?id=4d0c026c041f1515a6d01e5556b72ab1e1b471f1-9225904-images-thumbs&n=13n.pixabay.com/photo/2014/04/03/10/32/woman-310819_640.png" },
+            { german: "Gesicht", english: "Face", azerbaijani: "üz", plural: "Gesichter", gender: "neuter", type: "noun", image: "https://cdn.pixabhttps://avatars.mds.yandex.net/i?id=6b19810932683175e04be5d66def50089e7030ba-12463602-images-thumbs&n=13ay.com/photo/2014/04/03/10/32/face-310809_640.png" },
+            { german: "Mutter", english: "Mother", azerbaijani: "ana", plural: "Mütter", gender: "feminine", type: "noun", image: "https://cdn.https://avatars.mds.yandex.net/i?id=cb6b63e40d6fbd6248f550d40bd6f346353a8042-4613799-images-thumbs&n=13pixabay.com/photo/2013/07/12/14/53/mother-148278_640.png" },
+            { german: "Leute", english: "People", azerbaijani: "insanlar", plural: "-", gender: "plural", type: "noun", image: "https://cdn.pixabayhttps://avatars.mds.yandex.net/i?id=37ef5902be8e451eceb47376e2ff0312961cb8b8-5887740-images-thumbs&n=13.com/photo/2017/01/31/19/07/avatar-2026510_640.png" },
+            { german: "Nacht", english: "Night", azerbaijani: "gecə", plural: "Nächte", gender: "feminine", type: "noun", image: "https://cdn.pihttps://avatars.mds.yandex.net/i?id=77dfe5538671b9a13bf079cf7fc968f35f65d10a-5419333-images-thumbs&n=13xabay.com/photo/2017/01/31/23/42/night-2028033_640.png" },
+            { german: "Haus", english: "House", azerbaijani: "ev", plural: "Häuser", gender: "neuter", type: "noun", image: "https://cdn.pixabahttps://avatars.mds.yandex.net/i?id=2b739746f586ef3a073845c116263d430554fdda-4385789-images-thumbs&n=13y.com/photo/2013/07/13/10/55/house-157939_640.png" },
+            { german: "Vater", english: "Father", azerbaijani: "ata", plural: "Väter", gender: "masculine", type: "noun", image: "https://cdn.phttps://avatars.mds.yandex.net/i?id=875d9973055540c03451b03ba00a9a629290c508-4576071-images-thumbs&n=13ixabay.com/photo/2014/04/03/10/32/user-310807_640.png" },
+            { german: "Leben", english: "Life", azerbaijani: "həyat", plural: "Leben", gender: "neuter", type: "noun", image: "https://cdn.pixahttps://avatars.mds.yandex.net/i?id=2e79676d74a8eedfb6937c26d31b8db22f6f1afa-16784788-images-thumbs&n=13bay.com/photo/2013/07/12/14/53/heart-148121_640.png" },
+            { german: "Rücken", english: "Back", azerbaijani: "bel", plural: "Rücken", gender: "masculine", type: "noun", image: "https://cdn.pixabay.comhttps://avatars.mds.yandex.net/i?id=75746ed372d2f470874ccfedef6c66b933c3c68c-16334220-images-thumbs&n=13/photo/2014/04/03/10/32/spine-310806_640.png" },
+            { german: "Stimme", english: "Voice", azerbaijani: "səs", plural: "Stimmen", gender: "feminine", type: "noun", image: "https://cdn.phttps://avatars.mds.yandex.net/i?id=f0ef05070d23737e6b7c201a955f332a9c66eb35-9211418-images-thumbs&n=13ixabay.com/photo/2014/04/03/10/32/microphone-310806_640.png" },
+            { german: "Mädchen", english: "Girl", azerbaijani: "qız", plural: "Mädchen", gender: "neuter", type: "noun", image: "https://cdn.pixabayhttps://avatars.mds.yandex.net/i?id=6dadc6e15c5517f66108aef0819b6c19e368d945-8244093-images-thumbs&n=13.com/photo/2014/04/03/10/32/girl-310811_640.png" },
+            { german: "Ort", english: "Place", azerbaijani: "yer", plural: "Orte", gender: "masculine", type: "noun", image: "https://cdn.pixhttps://avatars.mds.yandex.net/i?id=8be365b6a2e06f305092d41a10b97c74358e33809a68dbdd-13083831-images-thumbs&n=13abay.com/photo/2013/07/12/15/36/map-150505_640.png" },
+            { german: "Junge", english: "Boy", azerbaijani: "oğlan", plural: "Jungen", gender: "masculine", type: "noun", image: "https://cdn.pixabhttps://avatars.mds.yandex.net/i?id=b8d9c4826b75ea985434db058d1de9505a787c02-5108220-images-thumbs&n=13ay.com/photo/2014/04/03/10/32/boy-310810_640.png" },
+            { german: "Auto", english: "Car", azerbaijani: "avtomobil", plural: "Autos", gender: "neuter", type: "noun", image: "https://https://avatars.mds.yandex.net/i?id=7d5407ade758130d359a5c018c90f2ffcb5255a0-8322579-images-thumbs&n=13cdn.pixabay.com/photo/2013/07/12/12/58/car-147033_640.png" },
+            { german: "Seite", english: "Side", azerbaijani: "tərəf", plural: "Seiten", gender: "feminine", type: "noun", image: "https://cdn.https://avatars.mds.yandex.net/i?id=523f61b68f728708efefb1e39deab6650623050b-8311686-images-thumbs&n=13pixabay.com/photo/2013/07/12/14/53/cube-148278_640.png" },
+            { german: "Arm", english: "Arm", azerbaijani: "qol", plural: "Arme", gender: "masculine", type: "noun", image: "https://cdn.pixabay.com/phttps://avatars.mds.yandex.net/i?id=69f330fe034bfd20b41550a04803d36c99a597cb-4011439-images-thumbs&n=13hoto/2014/04/03/10/32/arm-310814_640.png" },
+            { german: "Kind", english: "Child", azerbaijani: "uşaq", plural: "Kinder", gender: "neuter", type: "noun", image: "https://cdn.pixabhttps://avatars.mds.yandex.net/i?id=dbccfc26e8cd7033c1bb436998992024a672e185-4709974-images-thumbs&n=13ay.com/photo/2014/04/03/10/32/child-310811_640.png" },
+            { german: "Wort", english: "Word", azerbaijani: "söz", plural: "Wörter", gender: "neuter", type: "noun", image: "https://cdn.pixabahttps://avatars.mds.yandex.net/i?id=e11bb750c9f4a89f2ae3a061eefcf858bfd2ef03-5220621-images-thumbs&n=13y.com/photo/2013/07/12/15/36/abc-150505_640.png" },
+            { german: "Moment", english: "Moment", azerbaijani: "an", plural: "Momente", gender: "masculine", type: "noun", image: "https://cdn.pixabhttps://avatars.mds.yandex.net/i?id=dad15c2397573019368e42164d5cfc8394dd0939-13083617-images-thumbs&n=13ay.com/photo/2013/07/12/14/53/clock-148278_640.png" },
+            { german: "Haar", english: "Hair", azerbaijani: "saç", plural: "Haare", gender: "neuter", type: "noun", image: "https://cdn.pixhttps://avatars.mds.yandex.net/i?id=118178f45736cc02758adc40a5dc6ccb11453f2c-9182360-images-thumbs&n=13abay.com/photo/2014/04/03/10/32/hair-310813_640.png" },
+            { german: "Fuß", english: "Foot", azerbaijani: "ayaq", plural: "Füße", gender: "masculine", type: "noun", image: "https://cdn.pixabay.com/photo/2014/04/03/10/32/foot-310814_640.png" },
+            { german: "Wasser", english: "Water", azerbaijani: "su", plural: "-", gender: "neuter", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/water-148278_640.png" },
+            { german: "Licht", english: "Light", azerbaijani: "işıq", plural: "Lichter", gender: "neuter", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/light-bulb-148278_640.png" },
+            { german: "Welt", english: "World", azerbaijani: "dünya", plural: "Welten", gender: "feminine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/earth-148278_640.png" },
+            { german: "Name", english: "Name", azerbaijani: "ad", plural: "Namen", gender: "masculine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/tag-148278_640.png" },
+            { german: "Freund", english: "Friend", azerbaijani: "dost", plural: "Freunde", gender: "masculine", type: "noun", image: "https://cdn.pixabay.com/photo/2014/04/03/10/32/friends-310810_640.png" },
+            { german: "Fenster", english: "Window", azerbaijani: "pəncərə", plural: "Fenster", gender: "neuter", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/window-148278_640.png" },
+            { german: "Körper", english: "Body", azerbaijani: "bədən", plural: "Körper", gender: "masculine", type: "noun", image: "https://cdn.pixabay.com/photo/2014/04/03/10/32/body-310813_640.png" },
+            { german: "Tisch", english: "Table", azerbaijani: "masa", plural: "Tische", gender: "masculine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/table-148278_640.png" },
+            { german: "Morgen", english: "Morning", azerbaijani: "səhər", plural: "Morgen", gender: "masculine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/sunrise-148278_640.png" },
+            { german: "Bett", english: "Bed", azerbaijani: "yataq", plural: "Betten", gender: "neuter", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/bed-148278_640.png" },
+            { german: "Wand", english: "Wall", azerbaijani: "divar", plural: "Wände", gender: "feminine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/wall-148278_640.png" },
+            { german: "Straße", english: "Street", azerbaijani: "küçə", plural: "Straßen", gender: "feminine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/road-148278_640.png" },
+            { german: "Schule", english: "School", azerbaijani: "məktəb", plural: "Schulen", gender: "feminine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/school-148278_640.png" },
+            { german: "Luft", english: "Air", azerbaijani: "hava", plural: "-", gender: "feminine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/cloud-148278_640.png" },
+            { german: "Boden", english: "Floor", azerbaijani: "döşəmə", plural: "Böden", gender: "masculine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/floor-148278_640.png" },
+            { german: "Stunde", english: "Hour", azerbaijani: "saat", plural: "Stunden", gender: "feminine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/clock-148278_640.png" },
+            { german: "Ende", english: "End", azerbaijani: "son", plural: "Enden", gender: "neuter", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/end-148278_640.png" },
+            { german: "Familie", english: "Family", azerbaijani: "ailə", plural: "Familien", gender: "feminine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/family-148278_640.png" },
+            { german: "Kerl", english: "Guy", azerbaijani: "oğlan", plural: "Kerl", gender: "masculine", type: "noun", image: "https://cdn.pixabay.com/photo/2014/04/03/10/32/boy-310810_640.png" },
+            { german: "Minute", english: "Minute", azerbaijani: "dəqiqə", plural: "Minuten", gender: "feminine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/clock-148278_640.png" },
+            { german: "Geschichte", english: "Story", azerbaijani: "hekayə", plural: "Geschichten", gender: "feminine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/book-148278_640.png" },
+            { german: "Gott", english: "God", azerbaijani: "tanrı", plural: "Götter", gender: "masculine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/god-148278_640.png" },
+            { german: "Woche", english: "Week", azerbaijani: "həftə", plural: "Wochen", gender: "feminine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/calendar-148278_640.png" },
+            { german: "Arbeit", english: "Work", azerbaijani: "iş", plural: "-", gender: "feminine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/work-148278_640.png" },
+            { german: "Schulter", english: "Shoulder", azerbaijani: "çiyin", plural: "Schultern", gender: "feminine", type: "noun", image: "https://cdn.pixabay.com/photo/2014/04/03/10/32/shoulder-310814_640.png" },
+            { german: "Teil", english: "Part", azerbaijani: "hissə", plural: "Teile", gender: "masculine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/puzzle-148278_640.png" },
+            { german: "Verstand", english: "Mind", azerbaijani: "ağıl", plural: "-", gender: "masculine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/brain-148278_640.png" },
+            { german: "Buch", english: "Book", azerbaijani: "kitab", plural: "Bücher", gender: "neuter", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/book-148278_640.png" },
+            { german: "Finger", english: "Finger", azerbaijani: "barmaq", plural: "Finger", gender: "masculine", type: "noun", image: "https://cdn.pixabay.com/photo/2014/04/03/10/32/finger-310814_640.png" },
+            { german: "Mund", english: "Mouth", azerbaijani: "ağız", plural: "Münder", gender: "masculine", type: "noun", image: "https://cdn.pixabay.com/photo/2014/04/03/10/32/mouth-310813_640.png" },
+            { german: "Glas", english: "Glass", azerbaijani: "stəkan", plural: "Gläser", gender: "neuter", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/glass-148278_640.png" },
+            { german: "Baum", english: "Tree", azerbaijani: "ağac", plural: "Bäume", gender: "masculine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/tree-148278_640.png" },
+            { german: "Klang", english: "Sound", azerbaijani: "səs", plural: "Klänge", gender: "masculine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/sound-148278_640.png" },
+            { german: "Linie", english: "Line", azerbaijani: "xətt", plural: "Linien", gender: "feminine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/line-148278_640.png" },
+            { german: "Ehefrau", english: "Wife", azerbaijani: "arvad", plural: "Ehefrauen", gender: "feminine", type: "noun", image: "https://cdn.pixabay.com/photo/2014/04/03/10/32/woman-310819_640.png" },
+            { german: "Herz", english: "Heart", azerbaijani: "ürək", plural: "Herzen", gender: "neuter", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/heart-148278_640.png" },
+            { german: "Geld", english: "Money", azerbaijani: "pul", plural: "-", gender: "neuter", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/money-148278_640.png" },
+            { german: "Telefon", english: "Phone", azerbaijani: "telefon", plural: "Telefone", gender: "neuter", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/phone-148278_640.png" },
+            { german: "Blick", english: "Look", azerbaijani: "baxış", plural: "Blicke", gender: "masculine", type: "noun", image: "https://cdn.pixabay.com/photo/2014/04/03/10/32/eye-310807_640.png" },
+            { german: "Bein", english: "Leg", azerbaijani: "ayaq", plural: "Beine", gender: "neuter", type: "noun", image: "https://cdn.pixabay.com/photo/2014/04/03/10/32/leg-310814_640.png" },
+            { german: "Stuhl", english: "Chair", azerbaijani: "stul", plural: "Stühle", gender: "masculine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/chair-148278_640.png" },
+            { german: "Büro", english: "Office", azerbaijani: "ofis", plural: "Büros", gender: "neuter", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/office-148278_640.png" },
+            { german: "Bruder", english: "Brother", azerbaijani: "qardaş", plural: "Brüder", gender: "masculine", type: "noun", image: "https://cdn.pixabay.com/photo/2014/04/03/10/32/brother-310810_640.png" },
+            { german: "Frage", english: "Question", azerbaijani: "sual", plural: "Fragen", gender: "feminine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/question-mark-148278_640.png" },
+            { german: "Stadt", english: "City", azerbaijani: "şəhər", plural: "Städte", gender: "feminine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/city-148278_640.png" },
+            { german: "Monat", english: "Month", azerbaijani: "ay", plural: "Monate", gender: "masculine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/calendar-148278_640.png" },
+            { german: "Baby", english: "Baby", azerbaijani: "körpə", plural: "Babys", gender: "neuter", type: "noun", image: "https://cdn.pixabay.com/photo/2014/04/03/10/32/baby-310811_640.png" },
+            { german: "Zuhause", english: "Home", azerbaijani: "ev", plural: "Zuhause", gender: "neuter", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/home-148278_640.png" },
+            { german: "Hund", english: "Dog", azerbaijani: "it", plural: "Hunde", gender: "masculine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/dog-148278_640.png" },
+            { german: "Idee", english: "Idea", azerbaijani: "fikir", plural: "Ideen", gender: "feminine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/idea-148278_640.png" },
+            { german: "Küche", english: "Kitchen", azerbaijani: "mətbəx", plural: "Küchen", gender: "feminine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/kitchen-148278_640.png" },
+            { german: "Grundstück", english: "Lot", azerbaijani: "torpaq", plural: "Grundstücke", gender: "neuter", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/land-148278_640.png" },
+            { german: "Sohn", english: "Son", azerbaijani: "oğul", plural: "Söhne", gender: "masculine", type: "noun", image: "https://cdn.pixabay.com/photo/2014/04/03/10/32/boy-310810_640.png" },
+            { german: "Job", english: "Job", azerbaijani: "iş", plural: "Jobs", gender: "masculine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/work-148278_640.png" },
+            { german: "Papier", english: "Paper", azerbaijani: "kağız", plural: "Papiere", gender: "neuter", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/paper-148278_640.png" },
+            { german: "Schwester", english: "Sister", azerbaijani: "bacı", plural: "Schwestern", gender: "feminine", type: "noun", image: "https://cdn.pixabay.com/photo/2014/04/03/10/32/girl-310811_640.png" },
+            { german: "Lächeln", english: "Smile", azerbaijani: "təbəssüm", plural: "Lächeln", gender: "neuter", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/smile-148278_640.png" },
+            { german: "Punkt", english: "Point", azerbaijani: "nöqtə", plural: "Punkte", gender: "masculine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/point-148278_640.png" },
+            { german: "Gedanke", english: "Thought", azerbaijani: "fikir", plural: "Gedanken", gender: "masculine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/thought-148278_640.png" },
+            { german: "Liebe", english: "Love", azerbaijani: "sevgi", plural: "-", gender: "feminine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/heart-148278_640.png" },
+            { german: "Tod", english: "Death", azerbaijani: "ölüm", plural: "Tode", gender: "masculine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/skull-148278_640.png" },
+            { german: "Anderen", english: "Others", azerbaijani: "başqaları", plural: "-", gender: "plural", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/people-148278_640.png" },
+            { german: "Feuer", english: "Fire", azerbaijani: "od", plural: "Feuer", gender: "neuter", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/fire-148278_640.png" },
+            { german: "Schritt", english: "Step", azerbaijani: "addım", plural: "Schritte", gender: "masculine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/footprint-148278_640.png" },
+            { german: "Blut", english: "Blood", azerbaijani: "qan", plural: "-", gender: "neuter", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/blood-148278_640.png" },
+            { german: "Tatsache", english: "Fact", azerbaijani: "fakt", plural: "Tatsachen", gender: "feminine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/fact-148278_640.png" },
+            { german: "Atem", english: "Breath", azerbaijani: "nəfəs", plural: "Atemzüge", gender: "masculine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/breath-148278_640.png" },
+            { german: "Lippe", english: "Lip", azerbaijani: "dodaq", plural: "Lippen", gender: "feminine", type: "noun", image: "https://cdn.pixabay.com/photo/2014/04/03/10/32/mouth-310813_640.png" },
+            { german: "Sonne", english: "Sun", azerbaijani: "günəş", plural: "Sonnen", gender: "feminine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/sun-148278_640.png" },
+            { german: "Gebäude", english: "Building", azerbaijani: "bina", plural: "Gebäude", gender: "neuter", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/building-148278_640.png" },
+            { german: "Nummer", english: "Number", azerbaijani: "nömrə", plural: "Nummern", gender: "feminine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/number-148278_640.png" },
+            { german: "Ehemann", english: "Husband", azerbaijani: "ər", plural: "Ehemänner", gender: "masculine", type: "noun", image: "https://cdn.pixabay.com/photo/2014/04/03/10/32/man-310819_640.png" },
+            { german: "Elternteil", english: "Parent", azerbaijani: "valideyn", plural: "Elternteile", gender: "masculine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/parents-148278_640.png" },
+            { german: "Ecke", english: "Corner", azerbaijani: "künc", plural: "Ecken", gender: "feminine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/corner-148278_640.png" },
+            { german: "Problem", english: "Problem", azerbaijani: "problem", plural: "Probleme", gender: "neuter", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/problem-148278_640.png" },
+            { german: "Paar", english: "Couple", azerbaijani: "cüt", plural: "Paare", gender: "neuter", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/couple-148278_640.png" },
+            { german: "Tochter", english: "Daughter", azerbaijani: "qız", plural: "Töchter", gender: "feminine", type: "noun", image: "https://cdn.pixabay.com/photo/2014/04/03/10/32/girl-310811_640.png" },
+            { german: "Tasche", english: "Bag", azerbaijani: "çanta", plural: "Taschen", gender: "feminine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/bag-148278_640.png" },
+            { german: "Hölle", english: "Hell", azerbaijani: "cəhənnəm", plural: "-", gender: "feminine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/hell-148278_640.png" },
+            { german: "Ruhe", english: "Rest", azerbaijani: "istirahət", plural: "-", gender: "feminine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/rest-148278_640.png" },
+            { german: "Geschäft", english: "Business", azerbaijani: "biznes", plural: "Geschäfte", gender: "neuter", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/business-148278_640.png" },
+            { german: "Himmel", english: "Sky", azerbaijani: "səma", plural: "Himmel", gender: "masculine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/sky-148278_640.png" },
+            { german: "Schachtel", english: "Box", azerbaijani: "qutu", plural: "Schachteln", gender: "feminine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/box-148278_640.png" },
+            { german: "Person", english: "Person", azerbaijani: "şəxs", plural: "Personen", gender: "feminine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/person-148278_640.png" },
+            { german: "Grund", english: "Reason", azerbaijani: "səbəb", plural: "Gründe", gender: "masculine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/reason-148278_640.png" },
+            { german: "Recht", english: "Right", azerbaijani: "haqq", plural: "-", gender: "neuter", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/right-148278_640.png" },
+            { german: "Haut", english: "Skin", azerbaijani: "dəri", plural: "Häute", gender: "feminine", type: "noun", image: "https://cdn.pixabay.com/photo/2014/04/03/10/32/skin-310813_640.png" },
+            { german: "Fall", english: "Case", azerbaijani: "hal", plural: "Fälle", gender: "masculine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/case-148278_640.png" },
+            { german: "Stück", english: "Piece", azerbaijani: "parça", plural: "Stücke", gender: "neuter", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/piece-148278_640.png" },
+            { german: "Arzt", english: "Doctor", azerbaijani: "həkim", plural: "Ärzte", gender: "masculine", type: "noun", image: "https://cdn.pixabay.com/photo/2014/04/03/10/32/doctor-310810_640.png" },
+            { german: "Rand", english: "Edge", azerbaijani: "kənar", plural: "Ränder", gender: "masculine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/edge-148278_640.png" },
+            { german: "Bild", english: "Picture", azerbaijani: "şəkil", plural: "Bilder", gender: "neuter", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/picture-148278_640.png" },
+            { german: "Sinn", english: "Sense", azerbaijani: "məna", plural: "Sinne", gender: "masculine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/sense-148278_640.png" },
+            { german: "Ohr", english: "Ear", azerbaijani: "qulaq", plural: "Ohren", gender: "neuter", type: "noun", image: "https://cdn.pixabay.com/photo/2014/04/03/10/32/ear-310813_640.png" },
+            { german: "Sekunde", english: "Second", azerbaijani: "saniyə", plural: "Sekunden", gender: "feminine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/clock-148278_640.png" },
+            { german: "Dame", english: "Lady", azerbaijani: "xanım", plural: "Damen", gender: "feminine", type: "noun", image: "https://cdn.pixabay.com/photo/2014/04/03/10/32/woman-310819_640.png" },
+            { german: "Hals", english: "Neck", azerbaijani: "boyun", plural: "Hälse", gender: "masculine", type: "noun", image: "https://cdn.pixabay.com/photo/2014/04/03/10/32/neck-310813_640.png" },
+            { german: "Wind", english: "Wind", azerbaijani: "külək", plural: "Winde", gender: "masculine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/wind-148278_640.png" },
+            { german: "Schreibtisch", english: "Desk", azerbaijani: "yazı masası", plural: "Schreibtische", gender: "masculine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/desk-148278_640.png" },
+            { german: "Waffe", english: "Gun", azerbaijani: "silah", plural: "Waffen", gender: "feminine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/gun-148278_640.png" },
+            { german: "Stein", english: "Stone", azerbaijani: "daş", plural: "Steine", gender: "masculine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/stone-148278_640.png" },
+            { german: "Kaffee", english: "Coffee", azerbaijani: "qəhvə", plural: "Kaffees", gender: "masculine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/coffee-148278_640.png" },
+            { german: "Schiff", english: "Ship", azerbaijani: "gəmi", plural: "Schiffe", gender: "neuter", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/ship-148278_640.png" },
+            { german: "Erde", english: "Earth", azerbaijani: "yer", plural: "-", gender: "feminine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/earth-148278_640.png" },
+            { german: "Essen", english: "Food", azerbaijani: "yemək", plural: "-", gender: "neuter", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/food-148278_640.png" },
+            { german: "Pferd", english: "Horse", azerbaijani: "at", plural: "Pferde", gender: "neuter", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/horse-148278_640.png" },
+            { german: "Feld", english: "Field", azerbaijani: "sahə", plural: "Felder", gender: "neuter", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/field-148278_640.png" },
+            { german: "Krieg", english: "War", azerbaijani: "müharibə", plural: "Kriege", gender: "masculine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/war-148278_640.png" },
+            { german: "Nachmittag", english: "Afternoon", azerbaijani: "günorta", plural: "Nachmittage", gender: "masculine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/afternoon-148278_640.png" },
+            { german: "Herr", english: "Sir", azerbaijani: "cənab", plural: "Herren", gender: "masculine", type: "noun", image: "https://cdn.pixabay.com/photo/2014/04/03/10/32/man-310819_640.png" },
+            { german: "Raum", english: "Space", azerbaijani: "kosmos", plural: "Räume", gender: "masculine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/space-148278_640.png" },
+            { german: "Abend", english: "Evening", azerbaijani: "axşam", plural: "Abende", gender: "masculine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/evening-148278_640.png" },
+            { german: "Brief", english: "Letter", azerbaijani: "məktub", plural: "Briefe", gender: "masculine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/letter-148278_640.png" },
+            { german: "Bar", english: "Bar", azerbaijani: "bar", plural: "Bars", gender: "feminine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/bar-148278_640.png" },
+            { german: "Traum", english: "Dream", azerbaijani: "yuxu", plural: "Träume", gender: "masculine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/dream-148278_640.png" },
+            { german: "Wohnung", english: "Apartment", azerbaijani: "mənzil", plural: "Wohnungen", gender: "feminine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/apartment-148278_640.png" },
+            { german: "Brust", english: "Chest", azerbaijani: "sinə", plural: "Brüste", gender: "feminine", type: "noun", image: "https://cdn.pixabay.com/photo/2014/04/03/10/32/chest-310813_640.png" },
+            { german: "Spiel", english: "Game", azerbaijani: "oyun", plural: "Spiele", gender: "neuter", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/game-148278_640.png" },
+            { german: "Sommer", english: "Summer", azerbaijani: "yay", plural: "Sommer", gender: "masculine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/summer-148278_640.png" },
+            { german: "Angelegenheit", english: "Matter", azerbaijani: "məsələ", plural: "Angelegenheiten", gender: "feminine", type: "noun", image: "https://cdn.pixabay.com/photo/2013/07/12/14/53/matter-148278_640.png" }
+        ];
+
+        // Data - 40 Verbs with full conjugation
+        const verbs = [
+            {
+                german: "sein",
+                english: "to be",
+                azerbaijani: "olmaq",
+                type: "verb",
+                conjugation: {
+                    ich: "bin",
+                    du: "bist",
+                    er: "ist",
+                    wir: "sind",
+                    ihr: "seid",
+                    sie: "sind"
+                }
+            },
+            {
+                german: "haben",
+                english: "to have",
+                azerbaijani: "sahib olmaq",
+                type: "verb",
+                conjugation: {
+                    ich: "habe",
+                    du: "hast",
+                    er: "hat",
+                    wir: "haben",
+                    ihr: "habt",
+                    sie: "haben"
+                }
+            },
+            {
+                german: "werden",
+                english: "to become",
+                azerbaijani: "olmaq",
+                type: "verb",
+                conjugation: {
+                    ich: "werde",
+                    du: "wirst",
+                    er: "wird",
+                    wir: "werden",
+                    ihr: "werdet",
+                    sie: "werden"
+                }
+            },
+            {
+                german: "können",
+                english: "can",
+                azerbaijani: "bacarmaq",
+                type: "verb",
+                conjugation: {
+                    ich: "kann",
+                    du: "kannst",
+                    er: "kann",
+                    wir: "können",
+                    ihr: "könnt",
+                    sie: "können"
+                }
+            },
+            {
+                german: "müssen",
+                english: "must",
+                azerbaijani: "məcbur olmaq",
+                type: "verb",
+                conjugation: {
+                    ich: "muss",
+                    du: "musst",
+                    er: "muss",
+                    wir: "müssen",
+                    ihr: "müsst",
+                    sie: "müssen"
+                }
+            },
+            {
+                german: "sagen",
+                english: "to say",
+                azerbaijani: "demək",
+                type: "verb",
+                conjugation: {
+                    ich: "sage",
+                    du: "sagst",
+                    er: "sagt",
+                    wir: "sagen",
+                    ihr: "sagt",
+                    sie: "sagen"
+                }
+            },
+            {
+                german: "machen",
+                english: "to do/make",
+                azerbaijani: "etmək",
+                type: "verb",
+                conjugation: {
+                    ich: "mache",
+                    du: "machst",
+                    er: "macht",
+                    wir: "machen",
+                    ihr: "macht",
+                    sie: "machen"
+                }
+            },
+            {
+                german: "gehen",
+                english: "to go",
+                azerbaijani: "getmək",
+                type: "verb",
+                conjugation: {
+                    ich: "gehe",
+                    du: "gehst",
+                    er: "geht",
+                    wir: "gehen",
+                    ihr: "geht",
+                    sie: "gehen"
+                }
+            },
+            {
+                german: "kommen",
+                english: "to come",
+                azerbaijani: "gəlmək",
+                type: "verb",
+                conjugation: {
+                    ich: "komme",
+                    du: "kommst",
+                    er: "kommt",
+                    wir: "kommen",
+                    ihr: "kommt",
+                    sie: "kommen"
+                }
+            },
+            {
+                german: "sehen",
+                english: "to see",
+                azerbaijani: "görmək",
+                type: "verb",
+                conjugation: {
+                    ich: "sehe",
+                    du: "siehst",
+                    er: "sieht",
+                    wir: "sehen",
+                    ihr: "seht",
+                    sie: "sehen"
+                }
+            },
+            {
+                german: "wollen",
+                english: "to want",
+                azerbaijani: "istəmək",
+                type: "verb",
+                conjugation: {
+                    ich: "will",
+                    du: "willst",
+                    er: "will",
+                    wir: "wollen",
+                    ihr: "wollt",
+                    sie: "wollen"
+                }
+            },
+            {
+                german: "geben",
+                english: "to give",
+                azerbaijani: "vermək",
+                type: "verb",
+                conjugation: {
+                    ich: "gebe",
+                    du: "gibst",
+                    er: "gibt",
+                    wir: "geben",
+                    ihr: "gebt",
+                    sie: "geben"
+                }
+            },
+            {
+                german: "nehmen",
+                english: "to take",
+                azerbaijani: "götürmək",
+                type: "verb",
+                conjugation: {
+                    ich: "nehme",
+                    du: "nimmst",
+                    er: "nimmt",
+                    wir: "nehmen",
+                    ihr: "nehmt",
+                    sie: "nehmen"
+                }
+            },
+            {
+                german: "denken",
+                english: "to think",
+                azerbaijani: "düşünmək",
+                type: "verb",
+                conjugation: {
+                    ich: "denke",
+                    du: "denkst",
+                    er: "denkt",
+                    wir: "denken",
+                    ihr: "denkt",
+                    sie: "denken"
+                }
+            },
+            {
+                german: "finden",
+                english: "to find",
+                azerbaijani: "tapmaq",
+                type: "verb",
+                conjugation: {
+                    ich: "finde",
+                    du: "findest",
+                    er: "findet",
+                    wir: "finden",
+                    ihr: "findet",
+                    sie: "finden"
+                }
+            },
+            {
+                german: "bleiben",
+                english: "to stay",
+                azerbaijani: "qalmaq",
+                type: "verb",
+                conjugation: {
+                    ich: "bleibe",
+                    du: "bleibst",
+                    er: "bleibt",
+                    wir: "bleiben",
+                    ihr: "bleibt",
+                    sie: "bleiben"
+                }
+            },
+            {
+                german: "liegen",
+                english: "to lie",
+                azerbaijani: "uzanmaq",
+                type: "verb",
+                conjugation: {
+                    ich: "liege",
+                    du: "liegst",
+                    er: "liegt",
+                    wir: "liegen",
+                    ihr: "liegt",
+                    sie: "liegen"
+                }
+            },
+            {
+                german: "stehen",
+                english: "to stand",
+                azerbaijani: "durmaq",
+                type: "verb",
+                conjugation: {
+                    ich: "stehe",
+                    du: "stehst",
+                    er: "steht",
+                    wir: "stehen",
+                    ihr: "steht",
+                    sie: "stehen"
+                }
+            },
+            {
+                german: "fahren",
+                english: "to drive",
+                azerbaijani: "sürmək",
+                type: "verb",
+                conjugation: {
+                    ich: "fahre",
+                    du: "fährst",
+                    er: "fährt",
+                    wir: "fahren",
+                    ihr: "fahrt",
+                    sie: "fahren"
+                }
+            },
+            {
+                german: "sprechen",
+                english: "to speak",
+                azerbaijani: "danışmaq",
+                type: "verb",
+                conjugation: {
+                    ich: "spreche",
+                    du: "sprichst",
+                    er: "spricht",
+                    wir: "sprechen",
+                    ihr: "sprecht",
+                    sie: "sprechen"
+                }
+            },
+            {
+                german: "bringen",
+                english: "to bring",
+                azerbaijani: "gətirmək",
+                type: "verb",
+                conjugation: {
+                    ich: "bringe",
+                    du: "bringst",
+                    er: "bringt",
+                    wir: "bringen",
+                    ihr: "bringt",
+                    sie: "bringen"
+                }
+            },
+            {
+                german: "lassen",
+                english: "to let",
+                azerbaijani: "buraxmaq",
+                type: "verb",
+                conjugation: {
+                    ich: "lasse",
+                    du: "lässt",
+                    er: "lässt",
+                    wir: "lassen",
+                    ihr: "lasst",
+                    sie: "lassen"
+                }
+            },
+            {
+                german: "beginnen",
+                english: "to begin",
+                azerbaijani: "başlamaq",
+                type: "verb",
+                conjugation: {
+                    ich: "beginne",
+                    du: "beginnst",
+                    er: "beginnt",
+                    wir: "beginnen",
+                    ihr: "beginnt",
+                    sie: "beginnen"
+                }
+            },
+            {
+                german: "erzählen",
+                english: "to tell",
+                azerbaijani: "danışmaq",
+                type: "verb",
+                conjugation: {
+                    ich: "erzähle",
+                    du: "erzählst",
+                    er: "erzählt",
+                    wir: "erzählen",
+                    ihr: "erzählt",
+                    sie: "erzählen"
+                }
+            },
+            {
+                german: "versuchen",
+                english: "to try",
+                azerbaijani: "cəhd etmək",
+                type: "verb",
+                conjugation: {
+                    ich: "versuche",
+                    du: "versuchst",
+                    er: "versucht",
+                    wir: "versuchen",
+                    ihr: "versucht",
+                    sie: "versuchen"
+                }
+            },
+            {
+                german: "fragen",
+                english: "to ask",
+                azerbaijani: "soruşmaq",
+                type: "verb",
+                conjugation: {
+                    ich: "frage",
+                    du: "fragst",
+                    er: "fragt",
+                    wir: "fragen",
+                    ihr: "fragt",
+                    sie: "fragen"
+                }
+            },
+            {
+                german: "arbeiten",
+                english: "to work",
+                azerbaijani: "işləmək",
+                type: "verb",
+                conjugation: {
+                    ich: "arbeite",
+                    du: "arbeitest",
+                    er: "arbeitet",
+                    wir: "arbeiten",
+                    ihr: "arbeitet",
+                    sie: "arbeiten"
+                }
+            },
+            {
+                german: "brauchen",
+                english: "to need",
+                azerbaijani: "ehtiyac duymaq",
+                type: "verb",
+                conjugation: {
+                    ich: "brauche",
+                    du: "brauchst",
+                    er: "braucht",
+                    wir: "brauchen",
+                    ihr: "braucht",
+                    sie: "brauchen"
+                }
+            },
+            {
+                german: "erinnern",
+                english: "to remember",
+                azerbaijani: "xatırlamaq",
+                type: "verb",
+                conjugation: {
+                    ich: "erinnere",
+                    du: "erinnerst",
+                    er: "erinnert",
+                    wir: "erinnern",
+                    ihr: "erinnert",
+                    sie: "erinnern"
+                }
+            },
+            {
+                german: "erklären",
+                english: "to explain",
+                azerbaijani: "izah etmək",
+                type: "verb",
+                conjugation: {
+                    ich: "erkläre",
+                    du: "erklärst",
+                    er: "erklärt",
+                    wir: "erklären",
+                    ihr: "erklärt",
+                    sie: "erklären"
+                }
+            },
+            {
+                german: "gewinnen",
+                english: "to win",
+                azerbaijani: "qazanmaq",
+                type: "verb",
+                conjugation: {
+                    ich: "gewinne",
+                    du: "gewinnst",
+                    er: "gewinnt",
+                    wir: "gewinnen",
+                    ihr: "gewinnt",
+                    sie: "gewinnen"
+                }
+            },
+            {
+                german: "verlieren",
+                english: "to lose",
+                azerbaijani: "uduzmaq",
+                type: "verb",
+                conjugation: {
+                    ich: "verliere",
+                    du: "verlierst",
+                    er: "verliert",
+                    wir: "verlieren",
+                    ihr: "verliert",
+                    sie: "verlieren"
+                }
+            },
+            {
+                german: "verstehen",
+                english: "to understand",
+                azerbaijani: "başa düşmək",
+                type: "verb",
+                conjugation: {
+                    ich: "verstehe",
+                    du: "verstehst",
+                    er: "versteht",
+                    wir: "verstehen",
+                    ihr: "versteht",
+                    sie: "verstehen"
+                }
+            },
+            {
+                german: "antworten",
+                english: "to answer",
+                azerbaijani: "cavab vermək",
+                type: "verb",
+                conjugation: {
+                    ich: "antworte",
+                    du: "antwortest",
+                    er: "antwortet",
+                    wir: "antworten",
+                    ihr: "antwortet",
+                    sie: "antworten"
+                }
+            },
+            {
+                german: "schreiben",
+                english: "to write",
+                azerbaijani: "yazmaq",
+                type: "verb",
+                conjugation: {
+                    ich: "schreibe",
+                    du: "schreibst",
+                    er: "schreibt",
+                    wir: "schreiben",
+                    ihr: "schreibt",
+                    sie: "schreiben"
+                }
+            },
+            {
+                german: "lesen",
+                english: "to read",
+                azerbaijani: "oxumaq",
+                type: "verb",
+                conjugation: {
+                    ich: "lese",
+                    du: "liest",
+                    er: "liest",
+                    wir: "lesen",
+                    ihr: "lest",
+                    sie: "lesen"
+                }
+            },
+            {
+                german: "lernen",
+                english: "to learn",
+                azerbaijani: "öyrənmək",
+                type: "verb",
+                conjugation: {
+                    ich: "lerne",
+                    du: "lernst",
+                    er: "lernt",
+                    wir: "lernen",
+                    ihr: "lernt",
+                    sie: "lernen"
+                }
+            },
+            {
+                german: "lehren",
+                english: "to teach",
+                azerbaijani: "öyrətmək",
+                type: "verb",
+                conjugation: {
+                    ich: "lehre",
+                    du: "lehrst",
+                    er: "lehrt",
+                    wir: "lehren",
+                    ihr: "lehrt",
+                    sie: "lehren"
+                }
+            },
+            {
+                german: "öffnen",
+                english: "to open",
+                azerbaijani: "açmaq",
+                type: "verb",
+                conjugation: {
+                    ich: "öffne",
+                    du: "öffnest",
+                    er: "öffnet",
+                    wir: "öffnen",
+                    ihr: "öffnet",
+                    sie: "öffnen"
+                }
+            },
+            {
+                german: "schließen",
+                english: "to close",
+                azerbaijani: "bağlamaq",
+                type: "verb",
+                conjugation: {
+                    ich: "schließe",
+                    du: "schließt",
+                    er: "schließt",
+                    wir: "schließen",
+                    ihr: "schließt",
+                    sie: "schließen"
+                }
+            },
+            {
+                german: "kaufen",
+                english: "to buy",
+                azerbaijani: "almaq",
+                type: "verb",
+                conjugation: {
+                    ich: "kaufe",
+                    du: "kaufst",
+                    er: "kauft",
+                    wir: "kaufen",
+                    ihr: "kauft",
+                    sie: "kaufen"
+                }
+            },
+            {
+                german: "verkaufen",
+                english: "to sell",
+                azerbaijani: "satmaq",
+                type: "verb",
+                conjugation: {
+                    ich: "verkaufe",
+                    du: "verkaufst",
+                    er: "verkauft",
+                    wir: "verkaufen",
+                    ihr: "verkauft",
+                    sie: "verkaufen"
+                }
+            },
+            {
+                german: "bezahlen",
+                english: "to pay",
+                azerbaijani: "ödəmək",
+                type: "verb",
+                conjugation: {
+                    ich: "bezahle",
+                    du: "bezahlst",
+                    er: "bezahlt",
+                    wir: "bezahlen",
+                    ihr: "bezahlt",
+                    sie: "bezahlen"
+                }
+            },
+            {
+                german: "verdienen",
+                english: "to earn",
+                azerbaijani: "qazanmaq",
+                type: "verb",
+                conjugation: {
+                    ich: "verdiene",
+                    du: "verdienst",
+                    er: "verdient",
+                    wir: "verdienen",
+                    ihr: "verdient",
+                    sie: "verdienen"
+                }
+            }
+        ];
+
+        // Cultural facts about Germany/Austria/Switzerland
+        const culturalFacts = [
+              // 🌍 UNESCO Heritage Sites
+            "The Cologne Cathedral is a UNESCO World Heritage Site since 1996.",
+            "The Würzburg Residence with the Court Gardens is a UNESCO site in Bavaria.",
+            "The Palaces and Parks of Potsdam and Berlin are listed by UNESCO.",
+            "The Wadden Sea shared by Germany, Netherlands, and Denmark is a World Heritage Site.",
+            "Quedlinburg has over 1,300 half-timbered houses and is a UNESCO town.",
+            "The Semmering Railway in Austria is one of the world's first mountain railways.",
+            "St. Gall Abbey Library in Switzerland holds over 170,000 documents from the 8th century.",
+            "The Zollverein Coal Mine Industrial Complex in Essen represents German industrial heritage.",
+            "The Swiss Alps Jungfrau-Aletsch is the first natural UNESCO site in the Alps.",
+            "The Schönbrunn Palace and Gardens in Vienna are UNESCO listed.",
+            
+            // 🎼 Famous Composers
+            "Ludwig van Beethoven was born in Bonn, Germany.",
+            "Ludwig van Beethoven was born in Bonn, Germany.",
+            "Johann Sebastian Bach composed most of his music in Leipzig.",
+            "Wolfgang Amadeus Mozart was born in Salzburg, Austria.",
+            "Joseph Haydn, known as the 'Father of the Symphony', was Austrian.",
+            "Richard Wagner is famous for his complex operas like 'The Ring Cycle'.",
+            "Franz Schubert, an Austrian, composed over 600 vocal works.",
+            "Clara Schumann was one of the most distinguished pianists of the Romantic era.",
+            "Anton Bruckner's symphonies reflect Austrian spiritual depth.",
+            "Felix Mendelssohn founded the Leipzig Conservatory in 1843.",
+            "Arnold Schoenberg, an Austrian composer, pioneered the twelve-tone technique.",
+            
+            // 🗣 Unique Dialect Words
+            "In Bavaria, 'Servus' is a friendly informal hello.",
+            "Austrian German uses 'Grüß Gott' as a formal greeting.",
+            "Swiss German has 'Grüezi' for hello and 'Adieu' for goodbye.",
+            "'Mahlzeit' is said in Germany around lunch to greet coworkers.",
+            "'Moin Moin' is a Northern German greeting used all day.",
+            "'Baba' means goodbye in Austrian dialects.",
+            "In Swabia, 'Spätzle' is both a food and a dialect word.",
+            "Viennese often say 'Oida' to express frustration or amazement.",
+            "'Hopp Schwiiz!' is a cheer for the Swiss national team.",
+            "'Geil' in German slang means 'cool' or 'awesome'.",
+
+            // 🎉 Regional Festivals and Food
+            "Oktoberfest in Munich attracts over 6 million visitors annually.",
+            "Austria celebrates Fasching, its colorful carnival season.",
+            "Germany's Christmas markets (Weihnachtsmärkte) are world famous.",
+            "Basel Fasnacht is Switzerland's biggest carnival celebration.",
+            "The Cannstatter Volksfest in Stuttgart is the second-largest beer festival in the world.",
+            "In Austria, the Linzer Torte is considered the world's oldest known cake recipe.",
+            "Zürcher Geschnetzeltes is a famous veal dish from Zurich.",
+            "German 'Spargelzeit' celebrates white asparagus season.",
+            "Switzerland's cheese fondue is a winter culinary tradition.",
+            "In Vienna, coffee houses are part of UNESCO intangible heritage.",
+
+            // 📜 Historical Milestones
+            "The Berlin Wall fell on November 9, 1989.",
+            "The Reformation began in Wittenberg with Martin Luther's theses in 1517.",
+            "Austria was part of the Austro-Hungarian Empire until 1918.",
+            "The first German Empire was founded in 1871.",
+            "Switzerland has been neutral in all wars since 1815.",
+            "Germany was reunified in 1990 after decades of division.",
+            "Vienna was the capital of the Habsburg Empire.",
+            "The Swiss Confederation was founded in 1291.",
+            "Gutenberg's printing press (c. 1440) started the global printing revolution.",
+            "The Bauhaus movement began in Weimar, Germany, in 1919.",
+
+            // 🇩🇪 More General Fun & Cultural Facts
+            "Germany has over 1,500 types of sausages (Wurst).",
+            "In Germany, it's illegal to run out of fuel on the Autobahn.",
+            "The German language has three grammatical genders: der, die, das.",
+            "Oktoberfest actually starts in September and lasts 16-18 days.",
+            "German is the most widely spoken native language in the EU.",
+            "The Christmas tree tradition originated in Germany.",
+            "Swiss German varies from village to village.",
+            "Austria is known for its alpine ski resorts and classical music.",
+            "Switzerland has four official languages: German, French, Italian, Romansh.",
+            "The Autobahn in Germany has sections with no speed limit.",
+            "Austrians greet each other with 'Servus' informally.",
+            "Germany has more zoos than any other country—over 400.",
+            "Mozartkugeln are a popular sweet from Austria.",
+            "Switzerland is famous for its punctual public transport.",
+            "Germans love bread: there are over 300 types of bread.",
+            "In Switzerland, cow parades are traditional alpine events.",
+            "Käsekrainer is a cheesy sausage popular in Vienna.",
+            "The Danube River flows through Germany and Austria.",
+            "Swiss neutrality is protected by international treaty.",
+            "Austrian German has many French loanwords from the monarchy era.",
+            "The Black Forest is famous for cuckoo clocks and cake.",
+            "Liechtenstein, though small, also speaks German officially.",
+            "The oldest university in Germany is in Heidelberg (founded 1386).",
+            "Germany is Europe's largest economy.",
+            "In Austria, the Vienna Philharmonic New Year's concert is world-renowned.",
+            "German kids get a 'Schultüte' on their first school day.",
+            "The Alps span across Germany, Austria, and Switzerland.",
+            "Zürich is consistently ranked as one of the world's most livable cities.",
+            "Germany has over 20,000 castles.",
+            "The Neuschwanstein Castle inspired Disney's Cinderella castle.",
+            "Swiss watches are among the most accurate and expensive.",
+            "Sacher Torte is a famous Austrian chocolate cake.",
+            "Germany has a beer purity law (Reinheitsgebot) since 1516.",
+            "Alphorns are traditional Swiss instruments used in the Alps.",
+            "Vienna has been rated the most livable city several years in a row.",
+            "Germany's legal system strongly influenced the EU's law structure.",
+            "German schools have a dual vocational education system.",
+            "The Swiss flag is square—a rare shape for a national flag.",
+            "Austria uses 'Mag.' before names for someone with a master's degree.",
+            "In Germany, Sunday shopping is restricted by law.",
+            "There are more than 200 dialects of German across the DACH countries.",
+            "The German word 'Fernweh' means longing to travel far away.",
+            "Swiss chocolate is world-renowned for its quality.",
+            "Germans love recycling – strict separation of waste is the norm.",
+            "Austria's lakes are among the cleanest in Europe.",
+            "Every Austrian province has its own traditional clothing (Trachten).",
+            "Germany exports more beer than any other country.",
+            "The Euro was adopted in Austria and Germany in 2002.",
+            "Heidi, the famous children's story, is set in the Swiss Alps.",
+            "Germany's capital, Berlin, has more bridges than Venice.",
+            "Austria has the world's oldest zoo – Tiergarten Schönbrunn (1752).",
+            "DACH countries are known for precision engineering and design.",
+            "Germany ranks among the most environmentally friendly countries.",
+            "Many fairy tales by the Brothers Grimm are set in German forests.",
+            "Austria is famous for Lipizzaner horses at the Spanish Riding School.",
+            "The Swiss Federal Charter of 1291 is the founding document of Switzerland."
+        ];
+
+        // Combine nouns and verbs
+        const allWords = [...nouns, ...verbs];
+        let currentActivity = null;
+        let progressData = {
+            wordsLearned: 0,
+            currentStreak: 0,
+            lastActive: null,
+            masteredWords: []
+        };
+
+        // Load progress from localStorage
+        if (localStorage.getItem('germanProgress')) {
+            progressData = JSON.parse(localStorage.getItem('germanProgress'));
+        }
+
+        // DOM Elements
+        const activityGrid = document.getElementById('activity-grid');
+        const activityContainer = document.getElementById('activity-container');
+        const activityContent = document.getElementById('activity-content');
+        const activityName = document.getElementById('activity-name');
+        const closeActivity = document.getElementById('close-activity');
+
+        // Initialize
+        setupEventListeners();
+
+        function setupEventListeners() {
+            // Activity card clicks - fixed selector to use .word-card instead of .activity-card
+            document.querySelectorAll('.word-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    const activity = card.dataset.activity;
+                    loadActivity(activity);
+                });
+            });
+
+            // Close activity button
+            closeActivity.addEventListener('click', () => {
+                activityContainer.style.display = 'none';
+                activityGrid.style.display = 'grid';
+                currentActivity = null;
+            });
+        }
+
+        function loadActivity(activity) {
+            currentActivity = activity;
+            activityGrid.style.display = 'none';
+            activityContainer.style.display = 'block';
+            
+            // Update UI based on activity
+            switch(activity) {
+                case 'flashcard':
+                    activityName.textContent = 'Vokabelkarten';
+                    loadFlashcardActivity();
+                    break;
+                case 'typing':
+                    activityName.textContent = 'Schreibtrainer';
+                    loadTypingActivity();
+                    break;
+                case 'dragdrop':
+                    activityName.textContent = 'Plural-Spiel';
+                    loadDragDropActivity();
+                    break;
+                case 'fillblank':
+                    activityName.textContent = 'Lückentext';
+                    loadFillBlankActivity();
+                    break;
+                case 'quiz':
+                    activityName.textContent = 'Quiz';
+                    loadQuizActivity();
+                    break;
+                case 'memory':
+                    activityName.textContent = 'Memory-Spiel';
+                    loadMemoryActivity();
+                    break;
+                case 'conjugation':
+                    activityName.textContent = 'Verbkonjugation';
+                    loadConjugationActivity();
+                    break;
+                case 'speech':
+                    activityName.textContent = 'Aussprache';
+                    loadSpeechActivity();
+                    break;
+                case 'wotd':
+                    activityName.textContent = 'Wort des Tages';
+                    loadWOTDActivity();
+                    break;
+                case 'progress':
+                    activityName.textContent = 'Fortschritt';
+                    loadProgressActivity();
+                    break;
+            }
+        }
+
+        // 1. Flashcard Activity
+        function loadFlashcardActivity() {
+            activityContent.innerHTML = `
+                <div class="flashcard-container">
+                    <div class="flashcard" id="flashcard">
+                        <div class="flashcard-face flashcard-front">
+                            <div class="flashcard-word" id="flashcard-word">Word</div>
+                            <div class="flashcard-details" id="flashcard-details">Details</div>
+                            <img class="flashcard-image" id="flashcard-image" src="" alt="Word image">
+                            <div class="flashcard-translation" id="flashcard-translation">Translation</div>
+                        </div>
+                        <div class="flashcard-face flashcard-back">
+                            <div class="flashcard-word" id="flashcard-word-back">Word</div>
+                            <div class="flashcard-details" id="flashcard-details-back">Details</div>
+                            <img class="flashcard-image" id="flashcard-image-back" src="" alt="Word image">
+                            <div class="flashcard-translation" id="flashcard-translation-back">Translation</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flashcard-controls">
+                    <button class="btn btn-secondary" id="prev-card">Zurück</button>
+                    <button class="btn btn-primary" id="flip-card">Umdrehen</button>
+                    <button class="btn btn-secondary" id="next-card">Weiter</button>
+                </div>
+                <div class="controls">
+                    <button class="btn btn-secondary" id="shuffle-cards">Mischen</button>
+                    <button class="btn btn-primary" id="speak-word">Sprechen</button>
+                </div>
+            `;
+
+            const flashcard = document.getElementById('flashcard');
+            const flipBtn = document.getElementById('flip-card');
+            const prevBtn = document.getElementById('prev-card');
+            const nextBtn = document.getElementById('next-card');
+            const shuffleBtn = document.getElementById('shuffle-cards');
+            const speakBtn = document.getElementById('speak-word');
+            const wordElement = document.getElementById('flashcard-word');
+            const detailsElement = document.getElementById('flashcard-details');
+            const imageElement = document.getElementById('flashcard-image');
+            const translationElement = document.getElementById('flashcard-translation');
+            const wordBackElement = document.getElementById('flashcard-word-back');
+            const detailsBackElement = document.getElementById('flashcard-details-back');
+            const imageBackElement = document.getElementById('flashcard-image-back');
+            const translationBackElement = document.getElementById('flashcard-translation-back');
+
+            let currentIndex = 0;
+            let shuffledWords = [...allWords];
+
+            function displayCurrentCard() {
+                const word = shuffledWords[currentIndex];
+                wordElement.textContent = word.german;
+                wordBackElement.textContent = word.german;
+                
+                if (word.type === 'noun') {
+                    let genderSymbol = '';
+                    let genderClass = '';
+                    if (word.gender === 'masculine') {
+                        genderSymbol = '♂';
+                        genderClass = 'masculine';
+                    } else if (word.gender === 'feminine') {
+                        genderSymbol = '♀';
+                        genderClass = 'feminine';
+                    } else {
+                        genderSymbol = '⚲';
+                        genderClass = 'neuter';
+                    }
+                    
+                    detailsElement.innerHTML = `<span class="gender-symbol ${genderClass}">${genderSymbol}</span> ${word.gender === 'masculine' ? 'der' : word.gender === 'feminine' ? 'die' : 'das'} ${word.german}`;
+                    detailsBackElement.textContent = `Plural: ${word.plural || '-'}`;
+                    
+                    // Set color based on gender
+                    flashcard.querySelector('.flashcard-front').style.borderColor = 
+                        word.gender === 'masculine' ? 'var(--masculine)' : 
+                        word.gender === 'feminine' ? 'var(--feminine)' : 'var(--neuter)';
+                } else {
+                    detailsElement.textContent = 'Verb';
+                    detailsBackElement.textContent = `Infinitive: ${word.german}`;
+                    flashcard.querySelector('.flashcard-front').style.borderColor = 'var(--accent)';
+                }
+                
+                translationElement.textContent = word.azerbaijani;
+                translationBackElement.textContent = word.azerbaijani;
+                
+                if (word.image) {
+                    imageElement.src = word.image;
+                    imageElement.style.display = 'block';
+                    imageBackElement.src = word.image;
+                    imageBackElement.style.display = 'block';
+                } else {
+                    imageElement.style.display = 'none';
+                    imageBackElement.style.display = 'none';
+                }
+                
+                flashcard.classList.remove('flipped');
+            }
+
+            function shuffleCards() {
+                for (let i = shuffledWords.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [shuffledWords[i], shuffledWords[j]] = [shuffledWords[j], shuffledWords[i]];
+                }
+                currentIndex = 0;
+                displayCurrentCard();
+            }
+
+            function speakWord() {
+                const word = shuffledWords[currentIndex];
+                const utterance = new SpeechSynthesisUtterance(word.german);
+                utterance.lang = 'de-DE';
+                speechSynthesis.speak(utterance);
+            }
+
+            flipBtn.addEventListener('click', () => flashcard.classList.toggle('flipped'));
+            prevBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex - 1 + shuffledWords.length) % shuffledWords.length;
+                displayCurrentCard();
+            });
+            nextBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex + 1) % shuffledWords.length;
+                displayCurrentCard();
+            });
+            shuffleBtn.addEventListener('click', shuffleCards);
+            speakBtn.addEventListener('click', speakWord);
+
+            displayCurrentCard();
+        }
+
+        // 2. Typing Trainer
+        function loadTypingActivity() {
+            activityContent.innerHTML = `
+                <div class="typing-container">
+                    <div class="typing-prompt" id="typing-prompt">Prompt</div>
+                    <div class="typing-instruction" id="typing-instruction">Instruction</div>
+                    <input type="text" class="typing-input" id="typing-input" placeholder="Geben Sie Ihre Antwort ein...">
+                    <div class="typing-feedback" id="typing-feedback"></div>
+                </div>
+                <div class="controls">
+                    <button class="btn btn-primary" id="check-typing">Überprüfen</button>
+                    <button class="btn btn-secondary" id="next-typing">Nächstes Wort</button>
+                </div>
+            `;
+
+            const typingPrompt = document.getElementById('typing-prompt');
+            const typingInstruction = document.getElementById('typing-instruction');
+            const typingInput = document.getElementById('typing-input');
+            const typingFeedback = document.getElementById('typing-feedback');
+            const checkBtn = document.getElementById('check-typing');
+            const nextBtn = document.getElementById('next-typing');
+
+            let currentWord = null;
+
+            function setupNewWord() {
+                // Randomly choose between noun plural or verb conjugation
+                if (Math.random() > 0.5) {
+                    // Noun plural
+                    currentWord = nouns[Math.floor(Math.random() * nouns.length)];
+                    typingPrompt.textContent = `Was ist der Plural von "${currentWord.german}"?`;
+                    typingInstruction.textContent = `${currentWord.gender === 'masculine' ? 'der' : currentWord.gender === 'feminine' ? 'die' : 'das'} ${currentWord.german}`;
+                    typingInput.dataset.correctAnswer = currentWord.plural || '-';
+                } else {
+                    // Verb conjugation
+                    currentWord = verbs[Math.floor(Math.random() * verbs.length)];
+                    const pronouns = ['ich', 'du', 'er', 'wir', 'ihr', 'sie'];
+                    const pronoun = pronouns[Math.floor(Math.random() * pronouns.length)];
+                    typingPrompt.textContent = `Konjugieren Sie "${currentWord.german}" für "${pronoun}":`;
+                    typingInstruction.textContent = `Verb: ${currentWord.german}`;
+                    typingInput.dataset.correctAnswer = currentWord.conjugation[pronoun];
+                }
+                
+                typingInput.value = '';
+                typingFeedback.textContent = '';
+                typingFeedback.className = 'typing-feedback';
+            }
+
+            function checkAnswer() {
+                const correctAnswer = typingInput.dataset.correctAnswer;
+                const userAnswer = typingInput.value.trim();
+                
+                if (!userAnswer) {
+                    typingFeedback.textContent = 'Bitte geben Sie eine Antwort ein!';
+                    typingFeedback.classList.add('incorrect');
+                    return;
+                }
+                
+                if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
+                    typingFeedback.textContent = 'Richtig! 🎉';
+                    typingFeedback.classList.add('correct');
+                    
+                    // Update progress
+                    if (!progressData.masteredWords.includes(currentWord.german)) {
+                        progressData.masteredWords.push(currentWord.german);
+                        progressData.wordsLearned++;
+                        saveProgress();
+                    }
+                } else {
+                    typingFeedback.textContent = `Falsch! Die richtige Antwort ist: ${correctAnswer}`;
+                    typingFeedback.classList.add('incorrect');
+                }
+            }
+
+            checkBtn.addEventListener('click', checkAnswer);
+            nextBtn.addEventListener('click', setupNewWord);
+            
+            setupNewWord();
+        }
+
+        // 3. Drag and Drop Activity
+        function loadDragDropActivity() {
+            activityContent.innerHTML = `
+                <h3 style="text-align: center; margin-bottom: 2rem;">Ordnen Sie jedes Nomen seiner korrekten Pluralform zu</h3>
+                <div class="drag-drop-container">
+                    <div class="drag-column" id="drag-column">
+                        <h4 style="text-align: center; margin-bottom: 1rem; color: var(--masculine);">Singular</h4>
+                        <!-- Drag items will be added here -->
+                    </div>
+                    <div class="drop-column" id="drop-column">
+                        <h4 style="text-align: center; margin-bottom: 1rem; color: var(--feminine);">Plural</h4>
+                        <!-- Drop slots will be added here -->
+                    </div>
+                </div>
+                <div class="controls">
+                    <button class="btn btn-primary" id="check-dragdrop">Antworten überprüfen</button>
+                    <button class="btn btn-secondary" id="reset-dragdrop">Neu starten</button>
+                </div>
+                <div id="dragdrop-feedback" style="text-align: center; margin-top: 1rem; min-height: 2rem;"></div>
+            `;
+
+            const dragColumn = document.getElementById('drag-column');
+            const dropColumn = document.getElementById('drop-column');
+            const checkBtn = document.getElementById('check-dragdrop');
+            const resetBtn = document.getElementById('reset-dragdrop');
+            const feedback = document.getElementById('dragdrop-feedback');
+
+            let draggedItem = null;
+
+            // Select 5 random nouns with plurals for the game
+            const gameNouns = [...nouns]
+                .filter(n => n.plural && n.plural !== '-')
+                .sort(() => Math.random() - 0.5)
+                .slice(0, 5);
+            
+            // Create drag items
+            gameNouns.forEach(noun => {
+                const dragItem = document.createElement('div');
+                dragItem.className = 'drag-item';
+                dragItem.textContent = noun.german;
+                dragItem.draggable = true;
+                dragItem.dataset.german = noun.german;
+                dragItem.dataset.plural = noun.plural;
+                
+                // Set color based on gender
+                if (noun.gender === 'masculine') {
+                    dragItem.style.borderColor = 'var(--masculine)';
+                } else if (noun.gender === 'feminine') {
+                    dragItem.style.borderColor = 'var(--feminine)';
+                } else {
+                    dragItem.style.borderColor = 'var(--neuter)';
+                }
+                
+                dragItem.addEventListener('dragstart', () => {
+                    draggedItem = dragItem;
+                    setTimeout(() => dragItem.style.opacity = '0.4', 0);
+                });
+                
+                dragItem.addEventListener('dragend', () => {
+                    dragItem.style.opacity = '1';
+                });
+                
+                dragColumn.appendChild(dragItem);
+            });
+
+            // Create drop slots with shuffled plurals
+            const shuffledPlurals = [...gameNouns]
+                .sort(() => Math.random() - 0.5)
+                .map(noun => noun.plural);
+            
+            shuffledPlurals.forEach(plural => {
+                const dropSlot = document.createElement('div');
+                dropSlot.className = 'drop-slot';
+                dropSlot.textContent = plural;
+                dropSlot.dataset.plural = plural;
+                
+                dropSlot.addEventListener('dragover', e => {
+                    e.preventDefault();
+                    dropSlot.classList.add('highlight');
+                });
+                
+                dropSlot.addEventListener('dragleave', () => {
+                    dropSlot.classList.remove('highlight');
+                });
+                
+                dropSlot.addEventListener('drop', () => {
+                    dropSlot.classList.remove('highlight');
+                    if (draggedItem) {
+                        dropSlot.textContent = `${draggedItem.textContent} → ${dropSlot.dataset.plural}`;
+                        dropSlot.dataset.answer = draggedItem.dataset.plural;
+                    }
+                });
+                
+                dropColumn.appendChild(dropSlot);
+            });
+
+            checkBtn.addEventListener('click', () => {
+                let correct = 0;
+                const dropSlots = document.querySelectorAll('.drop-slot');
+                
+                dropSlots.forEach(slot => {
+                    if (slot.dataset.answer === slot.dataset.plural) {
+                        slot.style.backgroundColor = 'rgba(74, 222, 128, 0.2)';
+                        slot.style.borderColor = 'var(--success)';
+                        correct++;
+                    } else if (slot.dataset.answer) {
+                        slot.style.backgroundColor = 'rgba(248, 113, 113, 0.2)';
+                        slot.style.borderColor = 'var(--error)';
+                    }
+                });
+                
+                feedback.textContent = `Sie haben ${correct} von ${gameNouns.length} richtig!`;
+                if (correct === gameNouns.length) {
+                    feedback.style.color = 'var(--success)';
+                } else {
+                    feedback.style.color = 'var(--error)';
+                }
+            });
+            
+            resetBtn.addEventListener('click', () => {
+                loadDragDropActivity();
+            });
+        }
+
+        // 4. Fill-in-the-Blank Activity
+        function loadFillBlankActivity() {
+            activityContent.innerHTML = `
+                <h3 style="text-align: center; margin-bottom: 2rem;">Wählen Sie die richtige Antwort aus</h3>
+                <div class="drag-drop-container">
+                    <div class="drag-column" id="question-column">
+                        <!-- Questions will be added here -->
+                    </div>
+                    <div class="drop-column" id="answer-column">
+                        <!-- Answers will be added here -->
+                    </div>
+                </div>
+                <div class="controls">
+                    <button class="btn btn-primary" id="check-fillblank">Überprüfen</button>
+                    <button class="btn btn-secondary" id="next-fillblank">Nächste Frage</button>
+                </div>
+                <div id="fillblank-feedback" style="text-align: center; margin-top: 1rem; min-height: 2rem;"></div>
+            `;
+
+            const questionColumn = document.getElementById('question-column');
+            const answerColumn = document.getElementById('answer-column');
+            const checkBtn = document.getElementById('check-fillblank');
+            const nextBtn = document.getElementById('next-fillblank');
+            const feedback = document.getElementById('fillblank-feedback');
+
+            let currentQuestion = null;
+
+            function setupNewQuestion() {
+                questionColumn.innerHTML = '';
+                answerColumn.innerHTML = '';
+                
+                // Randomly choose between noun gender or verb conjugation
+                if (Math.random() > 0.5) {
+                    // Noun gender question
+                    currentQuestion = nouns[Math.floor(Math.random() * nouns.length)];
+                    const questionElement = document.createElement('div');
+                    questionElement.className = 'drag-item';
+                    questionElement.textContent = `Was ist der Artikel für "${currentQuestion.german}"?`;
+                    questionElement.dataset.correctAnswer = currentQuestion.gender === 'masculine' ? 'der' : 
+                                                          currentQuestion.gender === 'feminine' ? 'die' : 'das';
+                    questionColumn.appendChild(questionElement);
+                    
+                    // Create 3 options (1 correct, 2 incorrect)
+                    const options = ['der', 'die', 'das'];
+                    const correctIndex = options.indexOf(questionElement.dataset.correctAnswer);
+                    const incorrectOptions = options.filter((_, index) => index !== correctIndex);
+                    incorrectOptions.push(options[Math.floor(Math.random() * options.length)]);     
+                    incorrectOptions.push(questionElement.dataset.correctAnswer);
+                    
+                    // Shuffle the final options
+                    incorrectOptions.sort(() => Math.random() - 0.5).forEach(option => {
+                        const optionElement = document.createElement('div');
+                        optionElement.className = 'drag-item';
+                        optionElement.textContent = option;
+                        optionElement.draggable = true;
+                        optionElement.dataset.answer = option;
+                        
+                        optionElement.addEventListener('dragstart', () => {
+                            draggedItem = optionElement;
+                            setTimeout(() => optionElement.style.opacity = '0.4', 0);
+                        });
+                        
+                        optionElement.addEventListener('dragend', () => {
+                            optionElement.style.opacity = '1';
+                        });
+                        
+                        answerColumn.appendChild(optionElement);
+                    });
+                } else {
+                    // Verb conjugation question
+                    currentQuestion = verbs[Math.floor(Math.random() * verbs.length)];
+                    const pronouns = ['ich', 'du', 'er', 'wir', 'ihr', 'sie'];
+                    const pronoun = pronouns[Math.floor(Math.random() * pronouns.length)];
+                    
+                    const questionElement = document.createElement('div');
+                    questionElement.className = 'drag-item';
+                    questionElement.textContent = `Konjugieren Sie "${currentQuestion.german}" für "${pronoun}":`;
+                    questionElement.dataset.correctAnswer = currentQuestion.conjugation[pronoun];
+                    questionColumn.appendChild(questionElement);
+                    
+                    // Create 3 options (1 correct, 2 incorrect)
+                    const options = [
+                        currentQuestion.conjugation[pronoun],
+                        currentQuestion.conjugation[pronouns[(pronouns.indexOf(pronoun) + 1) % pronouns.length]],
+                        currentQuestion.conjugation[pronouns[(pronouns.indexOf(pronoun) + 2) % pronouns.length]]
+                    ];
+                    
+                    // Shuffle options
+                    options.sort(() => Math.random() - 0.5).forEach(option => {
+                        const optionElement = document.createElement('div');
+                        optionElement.className = 'drag-item';
+                        optionElement.textContent = option;
+                        optionElement.draggable = true;
+                        optionElement.dataset.answer = option;
+                        
+                        optionElement.addEventListener('dragstart', () => {
+                            draggedItem = optionElement;
+                            setTimeout(() => optionElement.style.opacity = '0.4', 0);
+                        });
+                        
+                        optionElement.addEventListener('dragend', () => {
+                            optionElement.style.opacity = '1';
+                        });
+                        
+                        answerColumn.appendChild(optionElement);
+                    });
+                }
+                
+                // Create drop slot
+                const dropSlot = document.createElement('div');
+                dropSlot.className = 'drop-slot';
+                dropSlot.id = 'fillblank-slot';
+                dropSlot.textContent = 'Hier ablegen';
+                
+                dropSlot.addEventListener('dragover', e => {
+                    e.preventDefault();
+                    dropSlot.classList.add('highlight');
+                });
+                
+                dropSlot.addEventListener('dragleave', () => {
+                    dropSlot.classList.remove('highlight');
+                });
+                
+                dropSlot.addEventListener('drop', () => {
+                    dropSlot.classList.remove('highlight');
+                    if (draggedItem) {
+                        dropSlot.textContent = draggedItem.textContent;
+                        dropSlot.dataset.answer = draggedItem.dataset.answer;
+                    }
+                });
+                
+                questionColumn.appendChild(dropSlot);
+                feedback.textContent = '';
+            }
+
+            function checkAnswer() {
+                const dropSlot = document.getElementById('fillblank-slot');
+                
+                if (!dropSlot.dataset.answer) {
+                    feedback.textContent = 'Bitte wählen Sie eine Antwort aus!';
+                    feedback.style.color = 'var(--error)';
+                    return;
+                }
+                
+                const correctAnswer = document.querySelector('.drag-item').dataset.correctAnswer;
+                
+                if (dropSlot.dataset.answer === correctAnswer) {
+                    feedback.textContent = 'Richtig! 🎉';
+                    feedback.style.color = 'var(--success)';
+                    dropSlot.style.backgroundColor = 'rgba(74, 222, 128, 0.2)';
+                    dropSlot.style.borderColor = 'var(--success)';
+                } else {
+                    feedback.textContent = `Falsch! Die richtige Antwort ist: ${correctAnswer}`;
+                    feedback.style.color = 'var(--error)';
+                    dropSlot.style.backgroundColor = 'rgba(248, 113, 113, 0.2)';
+                    dropSlot.style.borderColor = 'var(--error)';
+                }
+            }
+
+            checkBtn.addEventListener('click', checkAnswer);
+            nextBtn.addEventListener('click', setupNewQuestion);
+            
+            setupNewQuestion();
+        }
+
+        // 5. Quiz Generator
+        function loadQuizActivity() {
+            activityContent.innerHTML = `
+                <div class="quiz-container">
+                    <div class="quiz-question" id="quiz-question">
+                        Frage wird hier angezeigt
+                    </div>
+                    
+                    <div class="quiz-options" id="quiz-options">
+                        <!-- Options will be added here -->
+                    </div>
+                    
+                    <div class="controls" style="margin-top: 2rem;">
+                        <button class="btn btn-primary" id="check-quiz">Antwort überprüfen</button>
+                        <button class="btn btn-secondary" id="next-quiz">Nächste Frage</button>
+                    </div>
+                    
+                    <div id="quiz-feedback" style="text-align: center; margin-top: 1rem; min-height: 2rem;"></div>
+                </div>
+            `;
+
+            const quizQuestion = document.getElementById('quiz-question');
+            const quizOptions = document.getElementById('quiz-options');
+            const checkBtn = document.getElementById('check-quiz');
+            const nextBtn = document.getElementById('next-quiz');
+            const feedback = document.getElementById('quiz-feedback');
+
+            let currentQuestion = null;
+            let selectedOption = null;
+
+            function generateQuestion() {
+                // Randomly choose question type
+                const questionTypes = ['noun-gender', 'noun-plural', 'verb-translation', 'verb-conjugation'];
+                const questionType = questionTypes[Math.floor(Math.random() * questionTypes.length)];
+                
+                quizOptions.innerHTML = '';
+                selectedOption = null;
+                feedback.textContent = '';
+                
+                if (questionType === 'noun-gender') {
+                    const noun = nouns[Math.floor(Math.random() * nouns.length)];
+                    currentQuestion = {
+                        type: 'noun-gender',
+                        question: `Was ist der Artikel für "${noun.german}"?`,
+                        correctAnswer: noun.gender === 'masculine' ? 'der' : noun.gender === 'feminine' ? 'die' : 'das',
+                        options: ['der', 'die', 'das'].sort(() => Math.random() - 0.5)
+                    };
+                } 
+                else if (questionType === 'noun-plural') {
+                    const noun = nouns.filter(n => n.plural && n.plural !== '-')[Math.floor(Math.random() * nouns.length)];
+                    currentQuestion = {
+                        type: 'noun-plural',
+                        question: `Was ist der Plural von "${noun.german}"?`,
+                        correctAnswer: noun.plural,
+                        options: [
+                            noun.plural,
+                            ...nouns
+                                .filter(n => n.german !== noun.german && n.plural && n.plural !== '-')
+                                .map(n => n.plural)
+                                .sort(() => Math.random() - 0.5)
+                                .slice(0, 2)
+                        ].sort(() => Math.random() - 0.5)
+                    };
+                }
+                else if (questionType === 'verb-translation') {
+                    const verb = verbs[Math.floor(Math.random() * verbs.length)];
+                    currentQuestion = {
+                        type: 'verb-translation',
+                        question: `Was bedeutet "${verb.german}" auf Aserbaidschanisch?`,
+                        correctAnswer: verb.azerbaijani,
+                        options: [
+                            verb.azerbaijani,
+                            ...verbs
+                                .filter(v => v.german !== verb.german)
+                                .map(v => v.azerbaijani)
+                                .sort(() => Math.random() - 0.5)
+                                .slice(0, 2)
+                        ].sort(() => Math.random() - 0.5)
+                    };
+                }
+                else if (questionType === 'verb-conjugation') {
+                    const verb = verbs[Math.floor(Math.random() * verbs.length)];
+                    const pronouns = ['ich', 'du', 'er', 'wir', 'ihr', 'sie'];
+                    const pronoun = pronouns[Math.floor(Math.random() * pronouns.length)];
+                    
+                    currentQuestion = {
+                        type: 'verb-conjugation',
+                        question: `Wie konjugiert man "${verb.german}" für "${pronoun}"?`,
+                        correctAnswer: verb.conjugation[pronoun],
+                        options: [
+                            verb.conjugation[pronoun],
+                            verb.conjugation[pronouns[(pronouns.indexOf(pronoun) + 1) % pronouns.length]],
+                            verb.conjugation[pronouns[(pronouns.indexOf(pronoun) + 2) % pronouns.length]]
+                        ].sort(() => Math.random() - 0.5)
+                    };
+                }
+                
+                quizQuestion.textContent = currentQuestion.question;
+                
+                currentQuestion.options.forEach(option => {
+                    const optionElement = document.createElement('div');
+                    optionElement.className = 'quiz-option';
+                    optionElement.textContent = option;
+                    
+                    optionElement.addEventListener('click', () => {
+                        document.querySelectorAll('.quiz-option').forEach(opt => {
+                            opt.classList.remove('selected');
+                        });
+                        optionElement.classList.add('selected');
+                        selectedOption = option;
+                    });
+                    
+                    quizOptions.appendChild(optionElement);
+                });
+            }
+
+            function checkAnswer() {
+                if (!selectedOption) {
+                    feedback.textContent = 'Bitte wählen Sie eine Antwort aus!';
+                    feedback.style.color = 'var(--error)';
+                    return;
+                }
+                
+                document.querySelectorAll('.quiz-option').forEach(option => {
+                    option.classList.remove('correct', 'incorrect');
+                    if (option.textContent === currentQuestion.correctAnswer) {
+                        option.classList.add('correct');
+                    } else if (option.textContent === selectedOption) {
+                        option.classList.add('incorrect');
+                    }
+                });
+                
+                if (selectedOption === currentQuestion.correctAnswer) {
+                    feedback.textContent = 'Richtig! 🎉';
+                    feedback.style.color = 'var(--success)';
+                    
+                    // Update progress
+                    const word = currentQuestion.type.includes('noun') ? 
+                        nouns.find(n => n.german === currentQuestion.question.split('"')[1])?.german :
+                        verbs.find(v => v.german === currentQuestion.question.split('"')[1])?.german;
+                    
+                    if (word && !progressData.masteredWords.includes(word)) {
+                        progressData.masteredWords.push(word);
+                        progressData.wordsLearned++;
+                        saveProgress();
+                    }
+                } else {
+                    feedback.textContent = `Falsch! Die richtige Antwort ist: ${currentQuestion.correctAnswer}`;
+                    feedback.style.color = 'var(--error)';
+                }
+            }
+
+            checkBtn.addEventListener('click', checkAnswer);
+            nextBtn.addEventListener('click', generateQuestion);
+            
+            generateQuestion();
+        }
+
+        // 6. Memory Game
+        function loadMemoryActivity() {
+            activityContent.innerHTML = `
+                <div style="text-align: center; margin-bottom: 2rem;">
+                    <h3>Memory-Spiel</h3>
+                    <p>Finden Sie Paare von Nomen und ihren Pluralformen</p>
+                </div>
+                
+                <div class="memory-grid" id="memory-grid">
+                    <!-- Cards will be added here -->
+                </div>
+                
+                <div class="controls" style="margin-top: 2rem;">
+                    <button class="btn btn-primary" id="restart-memory">Neu starten</button>
+                </div>
+                
+                <div id="memory-feedback" style="text-align: center; margin-top: 1rem; min-height: 2rem;"></div>
+            `;
+
+            const memoryGrid = document.getElementById('memory-grid');
+            const restartBtn = document.getElementById('restart-memory');
+            const feedback = document.getElementById('memory-feedback');
+
+            function createMemoryGame() {
+                memoryGrid.innerHTML = '';
+                
+                // Select 6 nouns (3 pairs)
+                const gameNouns = [...nouns]
+                    .filter(n => n.plural && n.plural !== '-')
+                    .sort(() => Math.random() - 0.5)
+                    .slice(0, 3);
+                
+                // Create card pairs
+                const cards = [];
+                gameNouns.forEach(noun => {
+                    cards.push({ 
+                        content: noun.german, 
+                        pairId: noun.german,
+                        gender: noun.gender
+                    });
+                    cards.push({ 
+                        content: noun.plural, 
+                        pairId: noun.german,
+                        gender: noun.gender
+                    });
+                });
+                
+                // Shuffle cards
+                cards.sort(() => Math.random() - 0.5);
+                
+                let flippedCards = [];
+                let matchedPairs = 0;
+                
+                cards.forEach((card, index) => {
+                    const cardElement = document.createElement('div');
+                    cardElement.className = 'memory-card';
+                    cardElement.dataset.index = index;
+                    cardElement.dataset.pairId = card.pairId;
+                    cardElement.dataset.content = card.content;
+                    
+                    // Set border color based on gender
+                    if (card.gender === 'masculine') {
+                        cardElement.style.borderColor = 'var(--masculine)';
+                    } else if (card.gender === 'feminine') {
+                        cardElement.style.borderColor = 'var(--feminine)';
+                    } else {
+                        cardElement.style.borderColor = 'var(--neuter)';
+                    }
+                    
+                    const front = document.createElement('div');
+                    front.className = 'memory-card-face';
+                    front.textContent = '?';
+                    
+                    const back = document.createElement('div');
+                    back.className = 'memory-card-face memory-card-back';
+                    back.textContent = card.content;
+                    
+                    cardElement.appendChild(front);
+                    cardElement.appendChild(back);
+                    
+                    cardElement.addEventListener('click', () => flipCard(cardElement));
+                    memoryGrid.appendChild(cardElement);
+                });
+                
+                function flipCard(cardElement) {
+                    // Don't allow flipping if already flipped or matched
+                    if (cardElement.classList.contains('flipped') || 
+                        flippedCards.length >= 2 || 
+                        cardElement.classList.contains('matched')) {
+                        return;
+                    }
+                    
+                    cardElement.classList.add('flipped');
+                    flippedCards.push(cardElement);
+                    
+                    // Check for match when two cards are flipped
+                    if (flippedCards.length === 2) {
+                        const [card1, card2] = flippedCards;
+                        
+                        if (card1.dataset.pairId === card2.dataset.pairId) {
+                            // Match found
+                            setTimeout(() => {
+                                card1.classList.add('matched');
+                                card2.classList.add('matched');
+                                flippedCards = [];
+                                matchedPairs++;
+                                
+                                if (matchedPairs === gameNouns.length) {
+                                    feedback.textContent = 'Glückwunsch! Sie haben alle Paare gefunden! 🎉';
+                                    feedback.style.color = 'var(--success)';
+                                    
+                                    // Update progress
+                                    gameNouns.forEach(noun => {
+                                        if (!progressData.masteredWords.includes(noun.german)) {
+                                            progressData.masteredWords.push(noun.german);
+                                            progressData.wordsLearned++;
+                                        }
+                                    });
+                                    saveProgress();
+                                    
+                                    // Start new game after delay
+                                    setTimeout(createMemoryGame, 2000);
+                                }
+                            }, 500);
+                        } else {
+                            // No match
+                            setTimeout(() => {
+                                card1.classList.remove('flipped');
+                                card2.classList.remove('flipped');
+                                flippedCards = [];
+                            }, 1000);
+                        }
+                    }
+                }
+            }
+
+            restartBtn.addEventListener('click', createMemoryGame);
+            
+            createMemoryGame();
+        }
+
+        // 7. Verb Conjugation
+        function loadConjugationActivity() {
+            activityContent.innerHTML = `
+                <div class="conjugation-container">
+                    <h3 style="text-align: center; margin-bottom: 2rem;">Verbkonjugation</h3>
+                    
+                    <div class="conjugation-header">
+                        <div>Pronomen</div>
+                        <div>Konjugation</div>
+                    </div>
+                    
+                    <div class="conjugation-row">
+                        <div>ich</div>
+                        <input type="text" class="conjugation-input" id="conj-ich" placeholder="Konjugation eingeben...">
+                    </div>
+                    
+                    <div class="conjugation-row">
+                        <div>du</div>
+                        <input type="text" class="conjugation-input" id="conj-du" placeholder="Konjugation eingeben...">
+                    </div>
+                    
+                    <div class="conjugation-row">
+                        <div>er/sie/es</div>
+                        <input type="text" class="conjugation-input" id="conj-er" placeholder="Konjugation eingeben...">
+                    </div>
+                    
+                    <div class="conjugation-row">
+                        <div>wir</div>
+                        <input type="text" class="conjugation-input" id="conj-wir" placeholder="Konjugation eingeben...">
+                    </div>
+                    
+                    <div class="conjugation-row">
+                        <div>ihr</div>
+                        <input type="text" class="conjugation-input" id="conj-ihr" placeholder="Konjugation eingeben...">
+                    </div>
+                    
+                    <div class="conjugation-row">
+                        <div>sie/Sie</div>
+                        <input type="text" class="conjugation-input" id="conj-sie" placeholder="Konjugation eingeben...">
+                    </div>
+                    
+                    <div class="controls" style="margin-top: 2rem;">
+                        <button class="btn btn-primary" id="check-conjugation">Überprüfen</button>
+                        <button class="btn btn-secondary" id="new-verb">Neues Verb</button>
+                    </div>
+                    
+                    <div id="conjugation-feedback" style="text-align: center; margin-top: 1rem; min-height: 2rem;"></div>
+                </div>
+            `;
+
+            const ichInput = document.getElementById('conj-ich');
+            const duInput = document.getElementById('conj-du');
+            const erInput = document.getElementById('conj-er');
+            const wirInput = document.getElementById('conj-wir');
+            const ihrInput = document.getElementById('conj-ihr');
+            const sieInput = document.getElementById('conj-sie');
+            const checkBtn = document.getElementById('check-conjugation');
+            const newVerbBtn = document.getElementById('new-verb');
+            const feedback = document.getElementById('conjugation-feedback');
+
+            let currentVerb = null;
+
+            function setupNewVerb() {
+                currentVerb = verbs[Math.floor(Math.random() * verbs.length)];
+                feedback.textContent = `Konjugieren Sie das Verb: ${currentVerb.german} (${currentVerb.azerbaijani})`;
+                
+                // Clear inputs
+                ichInput.value = '';
+                duInput.value = '';
+                erInput.value = '';
+                wirInput.value = '';
+                ihrInput.value = '';
+                sieInput.value = '';
+                
+                // Remove previous highlights
+                [ichInput, duInput, erInput, wirInput, ihrInput, sieInput].forEach(input => {
+                    input.style.backgroundColor = '';
+                    input.style.borderColor = '';
+                });
+            }
+
+            function checkConjugation() {
+                const correctConjugations = currentVerb.conjugation;
+                let allCorrect = true;
+                
+                // Check each input
+                const checkInput = (input, correct) => {
+                    if (input.value.trim().toLowerCase() === correct.toLowerCase()) {
+                        input.style.backgroundColor = 'rgba(74, 222, 128, 0.1)';
+                        input.style.borderColor = 'var(--success)';
+                        return true;
+                    } else {
+                        input.style.backgroundColor = 'rgba(248, 113, 113, 0.1)';
+                        input.style.borderColor = 'var(--error)';
+                        allCorrect = false;
+                        return false;
+                    }
+                };
+                
+                checkInput(ichInput, correctConjugations.ich);
+                checkInput(duInput, correctConjugations.du);
+                checkInput(erInput, correctConjugations.er);
+                checkInput(wirInput, correctConjugations.wir);
+                checkInput(ihrInput, correctConjugations.ihr);
+                checkInput(sieInput, correctConjugations.sie);
+                
+                if (allCorrect) {
+                    feedback.textContent = 'Perfekt! Alle Konjugationen sind richtig! 🎉';
+                    feedback.style.color = 'var(--success)';
+                    
+                    // Update progress
+                    if (!progressData.masteredWords.includes(currentVerb.german)) {
+                        progressData.masteredWords.push(currentVerb.german);
+                        progressData.wordsLearned++;
+                        saveProgress();
+                    }
+                } else {
+                    feedback.textContent = 'Einige Konjugationen sind falsch';
+                    feedback.style.color = 'var(--error)';
+                }
+            }
+
+            checkBtn.addEventListener('click', checkConjugation);
+            newVerbBtn.addEventListener('click', setupNewVerb);
+            
+            setupNewVerb();
+        }
+
+        // 8. Speech Recognition
+        function loadSpeechActivity() {
+            activityContent.innerHTML = `
+                <div class="speech-container">
+                    <h3 style="text-align: center; margin-bottom: 1rem;">Ausspracheübung</h3>
+                    <p class="speech-prompt" id="speech-prompt">Wort wird hier angezeigt</p>
+                    
+                    <button class="speech-button" id="speech-button">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+                            <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                            <line x1="12" y1="19" x2="12" y2="23"></line>
+                            <line x1="8" y1="23" x2="16" y2="23"></line>
+                        </svg>
+                    </button>
+                    
+                    <div class="speech-result" id="speech-result"></div>
+                    
+                    <div class="controls">
+                        <button class="btn btn-secondary" id="next-speech">Nächstes Wort</button>
+                    </div>
+                </div>
+            `;
+
+            const speechPrompt = document.getElementById('speech-prompt');
+            const speechButton = document.getElementById('speech-button');
+            const speechResult = document.getElementById('speech-result');
+            const nextBtn = document.getElementById('next-speech');
+
+            let currentWord = null;
+            let recognition = null;
+
+            function setupNewWord() {
+                // Randomly choose between noun or verb
+                if (Math.random() > 0.5) {
+                    currentWord = nouns[Math.floor(Math.random() * nouns.length)];
+                } else {
+                    currentWord = verbs[Math.floor(Math.random() * verbs.length)];
+                }
+                speechPrompt.textContent = `Sagen Sie: "${currentWord.german}"`;
+                speechResult.textContent = '';
+                speechResult.className = 'speech-result';
+                // Initialize speech recognition
+                recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+                recognition.lang = 'de-DE';
+                recognition.interimResults = false;
+                recognition.onresult = (event) => {
+                    const transcript = event.results[0][0].transcript.trim();
+                    speechResult.textContent = `Sie sagten: "${transcript}"`;
+                    if (transcript.toLowerCase() === currentWord.german.toLowerCase()) {
+                        speechResult.textContent += ' - Richtig! 🎉';
+                        speechResult.className = 'speech-result correct';
+                        // Update progress
+                        if (!progressData.masteredWords.includes(currentWord.german)) {
+                            progressData.masteredWords.push(currentWord.german);
+                            progressData.wordsLearned++;
+                            saveProgress();
+                        }
+                    } else {
+                        speechResult.textContent += ` - Falsch. Versuchen Sie "${currentWord.german}" noch einmal.`;
+                        speechResult.className = 'speech-result incorrect';
+                    }
+                };
+                recognition.onerror = (event) => {
+                    speechResult.textContent = 'Fehler bei der Spracherkennung: ' + event.error;
+                    speechResult.className = 'speech-result incorrect';
+                };
+            }
+
+            speechButton.addEventListener('click', () => {
+                if (recognition) {
+                    speechButton.classList.add('listening');
+                    recognition.start();
+                    
+                    setTimeout(() => {
+                        speechButton.classList.remove('listening');
+                    }, 1500);
+                }
+            });
+            
+            nextBtn.addEventListener('click', setupNewWord);
+            
+            setupNewWord();
+        }
+
+        // 9. Word of the Day
+        function loadWOTDActivity() {
+            activityContent.innerHTML = `
+                <div class="wotd-container">
+                    <div class="wotd-card">
+                        <div class="wotd-title">Wort des Tages</div>
+                        <div class="wotd-word" id="wotd-word">Wort</div>
+                        <div class="wotd-details" id="wotd-details">Details</div>
+                        <div class="wotd-translation" id="wotd-translation">Übersetzung</div>
+                        <div class="wotd-fact" id="wotd-fact">Kultureller Fakt</div>
+                    </div>
+                    
+                    <div class="controls" style="margin-top: 2rem;">
+                        <button class="btn btn-primary" id="new-wotd">Neues Wort</button>
+                        <button class="btn btn-secondary" id="speak-wotd">Aussprache hören</button>
+                    </div>
+                </div>
+            `;
+
+            const wotdWord = document.getElementById('wotd-word');
+            const wotdDetails = document.getElementById('wotd-details');
+            const wotdTranslation = document.getElementById('wotd-translation');
+            const wotdFact = document.getElementById('wotd-fact');
+            const newBtn = document.getElementById('new-wotd');
+            const speakBtn = document.getElementById('speak-wotd');
+
+            let currentWord = null;
+
+            function setupNewWord() {
+                // Randomly choose between noun or verb
+                if (Math.random() > 0.5) {
+                    currentWord = nouns[Math.floor(Math.random() * nouns.length)];
+                    wotdWord.textContent = currentWord.german;
+                    wotdDetails.textContent = `${currentWord.gender === 'masculine' ? 'der' : currentWord.gender === 'feminine' ? 'die' : 'das'} ${currentWord.german} (Plural: ${currentWord.plural || '-'})`;
+                    
+                    // Set card color based on gender
+                    document.querySelector('.wotd-card').style.borderColor = 
+                        currentWord.gender === 'masculine' ? 'var(--masculine)' : 
+                        currentWord.gender === 'feminine' ? 'var(--feminine)' : 'var(--neuter)';
+                } else {
+                    currentWord = verbs[Math.floor(Math.random() * verbs.length)];
+                    wotdWord.textContent = currentWord.german;
+                    wotdDetails.textContent = `Verb (Infinitiv: ${currentWord.german})`;
+                    document.querySelector('.wotd-card').style.borderColor = 'var(--accent)';
+                }
+                
+                wotdTranslation.textContent = currentWord.azerbaijani;
+                wotdFact.textContent = culturalFacts[Math.floor(Math.random() * culturalFacts.length)];
+            }
+
+            function speakWord() {
+                if (currentWord) {
+                    const utterance = new SpeechSynthesisUtterance(currentWord.german);
+                    utterance.lang = 'de-DE';
+                    speechSynthesis.speak(utterance);
+                }
+            }
+
+            newBtn.addEventListener('click', setupNewWord);
+            speakBtn.addEventListener('click', speakWord);
+            
+            setupNewWord();
+        }
+
+        // 10. Progress Tracker
+        function loadProgressActivity() {
+            // Calculate mastery percentage
+            const masteryPercentage = Math.round((progressData.masteredWords.length / allWords.length) * 100);
+            
+            // Calculate days streak
+            const today = new Date().toDateString();
+            const lastActive = progressData.lastActive ? new Date(progressData.lastActive).toDateString() : null;
+            
+            if (today === lastActive) {
+                // Already active today, don't increase streak
+            } else if (lastActive && isYesterday(new Date(progressData.lastActive))) {
+                progressData.currentStreak++;
+            } else {
+                progressData.currentStreak = 1;
+            }
+            
+            progressData.lastActive = new Date();
+            saveProgress();
+            
+            activityContent.innerHTML = `
+                <div class="progress-container">
+                    <h3 style="text-align: center; margin-bottom: 2rem;">Ihr Lernfortschritt</h3>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-value">${progressData.wordsLearned}</div>
+                            <div class="stat-label">Gelernte Wörter</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">${progressData.currentStreak}</div>
+                            <div class="stat-label">Aktuelle Serie</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">${masteryPercentage}%</div>
+                            <div class="stat-label">Beherrschung</div>
+                        </div>
+                    </div>
+                    
+                    <h4 style="margin: 2rem 0 1rem;">Wortschatzfortschritt</h4>
+                    <div class="progress-chart">
+                        <div class="progress-bar" style="width: ${masteryPercentage}%"></div>
+                    </div>
+                    
+                    <div class="vocabulary-list">
+                        <div class="vocabulary-category">
+                            <h4>Beherrschte Wörter (${progressData.masteredWords.length})</h4>
+                            <div class="vocabulary-items">
+                                ${progressData.masteredWords.slice(0, 20).map(word => `
+                                    <div class="vocabulary-item">${word}</div>
+                                `).join('')}
+                                ${progressData.masteredWords.length > 20 ? 
+                                    `<div class="vocabulary-item">+${progressData.masteredWords.length - 20} mehr</div>` : ''}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function isYesterday(date) {
+            const yesterday = new Date();
+            yesterday.setDate(yesterday.getDate() - 1);
+            return date.toDateString() === yesterday.toDateString();
+        }
+
+        function saveProgress() {
+            localStorage.setItem('germanProgress', JSON.stringify(progressData));
+        }
+</script>
+</body>
+</html>
